@@ -4,43 +4,39 @@
     <svg style="box-shadow: 0 0 10px #0009;" width="300" height="300">
       <SvgGrid />
       <g
-        :style="{
-          transform: `translate(${ox}px, ${oy}px) ${sMatrix}`,
-        }"
+        :style="{ transform: `translate(${ox}px, ${oy}px)` }"
       >
-        <image class="nodrag" href="/image.png" width="100" height="100" />
-        <SvgArrow />
-        <SvgArrow style="
-          transform: rotate(90deg);
-        "/>
-      </g>
-      <g
-        :style="{
-          transform: `translate(${ox + tx + dtx}px, ${oy + ty + dty}px)`,
-        }"
-      >
-        <circle cx="0" cy="0" r="5" stroke="#333" fill="#fff" />
+        <g
+          :style="{ transform: sMatrix }"
+        >
+          <image class="nodrag" href="/image.png" width="100" height="100" />
+          <SvgArrow />
+          <SvgArrow style="
+            transform: rotate(90deg);
+          "/>
+        </g>
+        <g
+          :style="{
+            transform: `translate(${tx + dtx}px, ${ty + dty}px)`,
+          }"
+        >
+          <circle cx="0" cy="0" r="5" stroke="#333" fill="#fff" />
+          <SvgHandle
+            :x="ix * 100"
+            :y="iy * 100"
+            :onMove="i_onMove"
+            :onEnd="i_onEnd"
+          />
+          <SvgHandle
+            :x="jx * 100"
+            :y="jy * 100"
+            :onMove="j_onMove"
+            :onEnd="j_onEnd"
+          />
+        </g>
         <SvgHandle
-          :x="ix * 100"
-          :y="iy * 100"
-          :onMove="i_onMove"
-          :onEnd="i_onEnd"
-        />
-        <SvgHandle
-          :x="jx * 100"
-          :y="jy * 100"
-          :onMove="j_onMove"
-          :onEnd="j_onEnd"
-        />
-      </g>
-      <g
-        :style="{
-          transform: `translate(${ox + tx}px, ${oy + ty}px)`,
-        }"
-      >
-        <SvgHandle
-          :x="0"
-          :y="0"
+          :x="tx"
+          :y="ty"
           :onMove="t_onMove"
           :onEnd="t_onEnd"
         />
