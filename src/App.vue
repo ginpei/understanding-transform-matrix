@@ -18,7 +18,9 @@ export default class App extends Vue {
 </script>
 
 <style>
-#app {
-  text-align: center;
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
 }
 </style>

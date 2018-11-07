@@ -30,12 +30,33 @@ export interface IMatrix {
   ty: number;
 }
 
+export const mergeMatrix = (m: IMatrix, diff: IMatrix): IMatrix => {
+  return {
+    ix: m.ix + diff.ix,
+    iy: m.iy + diff.iy,
+    jx: m.jx + diff.jx,
+    jy: m.jy + diff.jy,
+    tx: m.tx + diff.tx,
+    ty: m.ty + diff.ty,
+  };
+};
+export const roundMatrix = (m: IMatrix): IMatrix => {
+  return {
+    ix: fixMatrixNumber(m.ix),
+    iy: fixMatrixNumber(m.iy),
+    jx: fixMatrixNumber(m.jx),
+    jy: fixMatrixNumber(m.jy),
+    tx: fixMatrixNumber(m.tx),
+    ty: fixMatrixNumber(m.ty),
+  };
+};
 export const getMatrixStr = (m: IMatrix, diff: IMatrix) => {
-  return `matrix(
-    ${fixMatrixNumber(m.ix + diff.ix)}, ${fixMatrixNumber(m.iy + diff.iy)},
-    ${fixMatrixNumber(m.jx + diff.jx)}, ${fixMatrixNumber(m.jy + diff.jy)},
-    ${fixMatrixNumber(m.tx + diff.tx)}, ${fixMatrixNumber(m.ty + diff.ty)}
-  )`;
+  const rm = roundMatrix(mergeMatrix(m, diff));
+  return `matrix(${[
+    rm.ix, rm.iy,
+    rm.jx, rm.jy,
+    rm.tx, rm.ty,
+  ].join(', ')})`;
 };
 
 const fixMatrixNumber = (n: number) => {
