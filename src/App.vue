@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-// import * as dragHandler from './dragHandler';
 import { IPos, IMatrix, getMatrixStr } from './misc';
 import SvgGraph from './components/SvgGraph.vue';
 
@@ -45,16 +44,6 @@ export default class App extends Vue {
 
   get sMatrix() {
     return getMatrixStr(this.matrix, this.draggingMatrix);
-  }
-
-  public mounted() {
-    // dragHandler.setUp(document, {
-    //   move: (dPos: IPos) => this.onMouseMove(dPos),
-    // });
-  }
-
-  public destroyed() {
-    // dragHandler.shutDown();
   }
 
   public graph_onUpdate(m: IMatrix, dm: IMatrix) {
