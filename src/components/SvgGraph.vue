@@ -13,6 +13,16 @@
           transform: `translate(${tx + dtx}px, ${ty + dty}px)`,
         }"
       >
+        <SvgArrow
+          color="red"
+          :x="(ix + dix) * aspectRatio"
+          :y="(iy + diy) * aspectRatio"
+        />
+        <SvgArrow
+          color="blue"
+          :x="(jx + djx) * aspectRatio"
+          :y="(jy + djy) * aspectRatio"
+        />
         <circle cx="0" cy="0" r="5" stroke="#333" fill="#fff" />
         <SvgHandle
           :x="ix * aspectRatio"
@@ -42,12 +52,14 @@ import { Prop, Component, Vue } from 'vue-property-decorator';
 import { IMatrix, IPos } from '@/misc';
 import SvgGrid from './SvgGrid.vue';
 import SvgTarget from './SvgTarget.vue';
+import SvgArrow from './SvgArrow.vue';
 import SvgHandle from './SvgHandle.vue';
 
 @Component({
   components: {
     SvgGrid,
     SvgTarget,
+    SvgArrow,
     SvgHandle,
   },
 })

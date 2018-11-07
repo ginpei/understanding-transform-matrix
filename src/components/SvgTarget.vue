@@ -6,19 +6,15 @@
       :width="100"
       :height="100"
     />
-    <SvgArrow />
-    <SvgArrow style="transform: rotate(90deg);"/>
   </g>
 </template>
 
 <script lang="ts">
 import { Prop, Component, Vue } from 'vue-property-decorator';
-import SvgArrow from './SvgArrow.vue';
 import { IMatrix, getMatrixStr } from '@/misc';
 
 @Component({
   components: {
-    SvgArrow,
   },
 })
 export default class App extends Vue {
