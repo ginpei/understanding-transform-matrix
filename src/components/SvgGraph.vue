@@ -4,16 +4,10 @@
     <g
       :style="{ transform: `translate(${ox}px, ${oy}px)` }"
     >
-      <g
-        :style="{ transform: sMatrix }"
-      >
-        <image class="SvgGraph-image" href="/image.png"
-          :width="aspectRatio"
-          :height="aspectRatio"
-        />
-        <SvgArrow />
-        <SvgArrow style="transform: rotate(90deg);"/>
-      </g>
+      <SvgTarget
+        :draggingMatrix="draggingMatrix"
+        :matrix="matrix"
+      />
       <g
         :style="{
           transform: `translate(${tx + dtx}px, ${ty + dty}px)`,
@@ -45,15 +39,15 @@
 
 <script lang="ts">
 import { Prop, Component, Vue } from 'vue-property-decorator';
-import { IMatrix, IPos, getMatrixStr } from '@/misc';
-import SvgArrow from './SvgArrow.vue';
+import { IMatrix, IPos } from '@/misc';
 import SvgGrid from './SvgGrid.vue';
+import SvgTarget from './SvgTarget.vue';
 import SvgHandle from './SvgHandle.vue';
 
 @Component({
   components: {
-    SvgArrow,
     SvgGrid,
+    SvgTarget,
     SvgHandle,
   },
 })
@@ -87,11 +81,6 @@ export default class SvgGraph extends Vue {
   protected get ty() { return this.matrix.ty; }
   protected get dtx() { return this.draggingMatrix.tx; }
   protected get dty() { return this.draggingMatrix.ty; }
-
-
-  protected get sMatrix() {
-    return getMatrixStr(this.matrix, this.draggingMatrix);
-  }
 
   public t_onMove(diff: IPos) {
     this.onUpdate(
@@ -167,8 +156,5 @@ export default class SvgGraph extends Vue {
 <style scoped>
 .SvgGraph {
   box-shadow: 0 0 10px #0009;
-}
-.SvgGraph-image {
-  pointer-events: none;
 }
 </style>
