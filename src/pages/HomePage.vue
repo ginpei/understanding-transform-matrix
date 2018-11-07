@@ -26,6 +26,10 @@
       Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&Action_id=121&Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
       (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
     </p>
+    <p>
+      Recommend to read:
+      <a href="http://www.ajimatics.com/entry/2018/10/31/060000">線形代数の知識ゼロから始めて行列式「だけ」理解する - アジマティクス</a>
+    </p>
   </div>
 </template>
 
