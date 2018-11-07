@@ -56,12 +56,15 @@ export default class SvgHandle extends Vue {
 
 <style scoped>
 .SvgHandle {
+  animation: blink 1s alternate infinite ease-out;
   cursor: move;
-  fill: transparent;
+  fill: #0cf9;
   stroke-width: 0;
 }
-.SvgHandle.-visible,
-.SvgHandle:hover {
-  fill: #0cf9;
+
+@keyframes blink {
+  0% { opacity: 1 }
+  50% { opacity: 0 }
+  100% { opacity: 0 }
 }
 </style>
