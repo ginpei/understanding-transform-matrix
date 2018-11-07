@@ -16,3 +16,24 @@ export const getEventPositions = (event: MouseEvent) => {
 
   return positions;
 };
+
+export interface IMatrix {
+  ix: number;
+  iy: number;
+  jx: number;
+  jy: number;
+  tx: number;
+  ty: number;
+}
+
+export const getMatrixStr = (m: IMatrix, diff: IMatrix) => {
+  return `matrix(
+    ${fixMatrixNumber(m.ix + diff.ix)}, ${fixMatrixNumber(m.iy + diff.iy)},
+    ${fixMatrixNumber(m.jx + diff.jx)}, ${fixMatrixNumber(m.jy + diff.jy)},
+    ${fixMatrixNumber(m.tx + diff.tx)}, ${fixMatrixNumber(m.ty + diff.ty)}
+  )`;
+};
+
+const fixMatrixNumber = (n: number) => {
+  return Number(n.toFixed(3));
+};
