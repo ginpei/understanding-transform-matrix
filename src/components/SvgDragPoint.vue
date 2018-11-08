@@ -73,6 +73,12 @@ export default class SvgDragPoint extends Vue {
 <style scoped>
 .SvgDragPoint-label {
   font-size: 10px;
+  font-weight: bold;
+  text-shadow:
+    1px 1px 1px #fff,
+    -1px 1px 1px #fff,
+    1px -1px 1px #fff,
+    -1px -1px 1px #fff;
   pointer-events: none;
 }
 
