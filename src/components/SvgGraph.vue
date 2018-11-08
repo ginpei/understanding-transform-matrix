@@ -14,16 +14,18 @@
         }"
       >
         <SvgArrow
-          color="red"
+          :color="colors.i"
           :x="(ix + dix) * aspectRatio"
           :y="(iy + diy) * aspectRatio"
         />
         <SvgArrow
-          color="blue"
+          :color="colors.j"
           :x="(jx + djx) * aspectRatio"
           :y="(jy + djy) * aspectRatio"
         />
-        <circle cx="0" cy="0" r="5" stroke="#333" fill="#fff" />
+        <circle cx="0" cy="0" r="5" stroke-width="2" fill="#fff"
+          :stroke="colors.transition"
+        />
         <SvgHandle
           :x="ix * aspectRatio"
           :y="iy * aspectRatio"
@@ -49,7 +51,7 @@
 
 <script lang="ts">
 import { Prop, Component, Vue } from 'vue-property-decorator';
-import { IMatrix, IPos } from '@/misc';
+import { IMatrix, IPos, colors } from '@/misc';
 import SvgGrid from './SvgGrid.vue';
 import SvgTarget from './SvgTarget.vue';
 import SvgArrow from './SvgArrow.vue';
@@ -64,6 +66,7 @@ import SvgHandle from './SvgHandle.vue';
   },
 })
 export default class SvgGraph extends Vue {
+  public colors = colors;
   public aspectRatio = 100;
 
   @Prop() protected posOrigin!: IPos;

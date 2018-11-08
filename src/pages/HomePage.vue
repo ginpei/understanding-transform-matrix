@@ -11,14 +11,20 @@
         />
       </div>
       <div class="HomePage-dataBlock">
-        <pre><code>.the-target {
-  transform: {{ sMatrix }};
-}</code></pre>
-        <p>
-          Vector <code>i</code> ({{ ix }}, {{ iy }})<br/>
-          Vector <code>j</code> ({{ jx }}, {{ jy }})<br/>
-          Transition ({{ tx }}, {{ ty }})<br/>
-        </p>
+        <MatrixCode
+          :matrix="mergedMatrix"
+        />
+        <div>
+          <div class="HomePage-position"
+            :style="{ color: colors.i }"
+          >Vector <var>i</var> ({{ ix }}, {{ iy }})</div>
+          <div class="HomePage-position"
+            :style="{ color: colors.j }"
+          >Vector <var>j</var> ({{ jx }}, {{ jy }})</div>
+          <div class="HomePage-position"
+            :style="{ color: colors.transition }"
+          >Transition ({{ tx }}, {{ ty }})</div>
+        </div>
         <p></p>
       </div>
     </div>
@@ -35,15 +41,19 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix } from '@/misc';
+import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix, colors } from '@/misc';
 import SvgGraph from '@/components/SvgGraph.vue';
+import MatrixCode from '@/components/MatrixCode.vue';
 
 @Component({
   components: {
     SvgGraph,
+    MatrixCode,
   },
 })
 export default class App extends Vue {
+  public colors = colors;
+
   protected matrix: IMatrix = {
     ix: 1,
     iy: 0,
@@ -101,5 +111,8 @@ export default class App extends Vue {
 }
 .HomePage-dataBlock {
   flex: 1;
+}
+.HomePage-position {
+  font-weight: bold;
 }
 </style>

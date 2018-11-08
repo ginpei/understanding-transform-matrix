@@ -1,5 +1,11 @@
 export const noop = () => undefined;
 
+export enum colors {
+  i = 'red',
+  j = 'blue',
+  transition = 'green',
+}
+
 export interface IPos {
   x: number;
   y: number;
