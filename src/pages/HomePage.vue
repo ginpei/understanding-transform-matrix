@@ -23,26 +23,15 @@
         />
       </div>
       <div class="HomePage-dataBlock">
-        <MatrixCode
-          :matrix="mergedMatrix"
-        />
-        <div>
-          <div class="HomePage-position"
-            :style="{ color: colors.i }"
-          >Vector <var>i</var> ({{ ix }}, {{ iy }})</div>
-          <div class="HomePage-position"
-            :style="{ color: colors.j }"
-          >Vector <var>j</var> ({{ jx }}, {{ jy }})</div>
-          <div class="HomePage-position"
-            :style="{ color: colors.transition }"
-          >Transition ({{ tx }}, {{ ty }})</div>
-        </div>
         <p>
           Presets:
           <button @click="initial_onClick">Initial</button>
           <button @click="rotate_onClick">Rotate 30°</button>
           <button @click="flip_onClick">Flip horizontally</button>
         </p>
+        <MatrixCode
+          :matrix="mergedMatrix"
+        />
       </div>
     </div>
     <p>
@@ -58,7 +47,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix, colors } from '@/misc';
+import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix } from '@/misc';
 import SvgGraph from '@/components/SvgGraph.vue';
 import MatrixCode from '@/components/MatrixCode.vue';
 import GHeader from '@/components/GHeader.vue';
@@ -71,8 +60,6 @@ import GHeader from '@/components/GHeader.vue';
   },
 })
 export default class App extends Vue {
-  public colors = colors;
-
   protected matrix: IMatrix = {
     ix: 1,
     iy: 0,

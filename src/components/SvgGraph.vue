@@ -26,20 +26,23 @@
         <circle cx="0" cy="0" r="5" stroke-width="2" fill="#fff"
           :stroke="colors.transition"
         />
-        <SvgHandle
+        <SvgHandle title="i"
+          :color="colors.i"
           :x="ix * aspectRatio"
           :y="iy * aspectRatio"
           :onMove="i_onMove"
           :onEnd="i_onEnd"
         />
-        <SvgHandle
+        <SvgHandle title="j"
+          :color="colors.j"
           :x="jx * aspectRatio"
           :y="jy * aspectRatio"
           :onMove="j_onMove"
           :onEnd="j_onEnd"
         />
       </g>
-      <SvgHandle
+      <SvgHandle title="translate"
+        :color="colors.transition"
         :x="tx"
         :y="ty"
         :onMove="t_onMove"

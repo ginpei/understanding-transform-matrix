@@ -1,17 +1,23 @@
 <template>
-  <circle class="SvgHandle" r="10"
-    :cx="x + posDiff.x"
-    :cy="y + posDiff.y"
-  />
+  <g class="SvgHandle"
+    :transform="`translate(${x + posDiff.x}, ${y + posDiff.y})`"
+  >
+    <text class="SvgHandle-label" x="0.5em" y="-1em"
+      :fill="color"
+    >{{ title }} ({{sx}}, {{sy}})</text>
+    <circle class="SvgHandle-circle" r="10" />
+  </g>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import DragHandler from '../DragHandler';
-import { IPos, zeroPos, noop } from '@/misc';
+import { IPos, zeroPos, noop, fixMatrixNumber } from '@/misc';
 
 @Component
 export default class SvgHandle extends Vue {
+  @Prop() protected title!: string;
+  @Prop() protected color!: string;
   @Prop(Number) protected x!: number;
   @Prop(Number) protected y!: number;
   @Prop({ default: noop }) protected onMove!: (diff: IPos) => void;
@@ -19,6 +25,16 @@ export default class SvgHandle extends Vue {
 
   protected posDiff = zeroPos;
   protected dragHandler = new DragHandler();
+
+  protected get sx() {
+    // TODO remove magic number
+    return fixMatrixNumber((this.x + this.posDiff.x) / 100);
+  }
+
+  protected get sy() {
+    // TODO remove magic number
+    return fixMatrixNumber((this.y + this.posDiff.y) / 100);
+  }
 
   constructor() {
     super();
@@ -55,7 +71,12 @@ export default class SvgHandle extends Vue {
 </script>
 
 <style scoped>
-.SvgHandle {
+.SvgHandle-label {
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.SvgHandle-circle {
   animation: blink 1s alternate infinite ease-out;
   cursor: move;
   fill: #0cf9;

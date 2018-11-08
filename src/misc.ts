@@ -65,6 +65,6 @@ export const getMatrixStr = (m: IMatrix, diff: IMatrix) => {
   ].join(', ')})`;
 };
 
-const fixMatrixNumber = (n: number) => {
+export const fixMatrixNumber = (n: number) => {
   return Number(n.toFixed(3));
 };

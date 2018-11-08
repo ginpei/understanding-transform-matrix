@@ -54,6 +54,8 @@ export default class DragHandler {
   }
 
   public onMouseDown(event: MouseEvent) {
+    event.preventDefault();
+
     const [pos] = getEventPositions(event);
     this.startDragging(pos);
   }
@@ -74,6 +76,8 @@ export default class DragHandler {
 
   public onTouchStart(event: TouchEvent) {
     if (!this._dragging) {
+      event.preventDefault();
+
       const [pos] = getEventPositions(event);
       this.startDragging(pos);
     }
