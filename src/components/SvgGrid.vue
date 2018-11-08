@@ -1,63 +1,77 @@
 <template>
-  <g>
-    <line
+  <g class="SvgGrid">
+    <line class="SvgGrid-line"
       v-for="v in hLines"
-      :key="v.i"
+      :key="`h-${v.y1}`"
       :x1="v.x1"
       :y1="v.y1"
       :x2="v.x2"
       :y2="v.y2"
     />
-    <line
+    <line class="SvgGrid-line"
       v-for="v in vLines"
-      :key="v.i"
+      :key="`v-${v.x1}`"
       :x1="v.x1"
       :y1="v.y1"
       :x2="v.x2"
       :y2="v.y2"
     />
-    <line class="-origin" x1="0" y1="100" x2="300" y2="100" />
-    <line class="-origin" x1="100" y1="0" x2="100" y2="300" />
+    <line class="SvgGrid-origin"
+      :x1="0"
+      :y1="posOrigin.y"
+      :x2="width"
+      :y2="posOrigin.y"
+    />
+    <line class="SvgGrid-origin"
+      :x1="posOrigin.x"
+      :y1="0"
+      :x2="posOrigin.x"
+      :y2="height"
+    />
   </g>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Prop, Component, Vue } from 'vue-property-decorator';
+import { IPos } from '@/misc';
 
-@Component({
-})
-export default class App extends Vue {
-  protected width = 300;
-  protected height = 300;
-  protected length = 10;
+@Component({})
+export default class SvgGrid extends Vue {
+  @Prop() protected width!: number;
+  @Prop() protected height!: number;
+  @Prop() protected posOrigin!: IPos;
+  @Prop() protected interval!: number;
 
-  protected hLines = [...Array(this.height / this.length)].map((_, i) => ({
-    i: `h-${i}`,
-    x1: 0,
-    y1: i * this.length,
-    x2: this.width,
-    y2: i * this.length,
-  }));
+  protected get hLines() {
+    const length = Math.ceil(this.height / this.interval);
+    const offset = this.posOrigin.y % this.interval;
+    return [...Array(length)].map((_, i) => ({
+      x1: 0,
+      y1: offset + i * this.interval,
+      x2: this.width,
+      y2: offset + i * this.interval,
+    }));
+  }
 
-  protected vLines = [...Array(this.width / this.length)].map((_, i) => ({
-    i: `v-${i}`,
-    x1: i * this.length,
-    y1: 0,
-    x2: i * this.length,
-    y2: this.height,
-  }));
+  protected get vLines() {
+    const length = Math.ceil(this.width / this.interval);
+    const offset = this.posOrigin.x % this.interval;
+    return [...Array(length)].map((_, i) => ({
+      x1: offset + i * this.interval,
+      y1: 0,
+      x2: offset + i * this.interval,
+      y2: this.height,
+    }));
+  }
 }
 </script>
 
-<style scoped>
-line {
-  stroke: #f0f0f0;
-  stroke-width: 1px;
-}
-line.-origin {
+<style>
+.SvgGrid-origin {
   stroke: #333;
 }
-line.-primary {
+.SvgGrid-line {
   stroke: #ccc;
+  stroke-width: 1px;
 }
 </style>

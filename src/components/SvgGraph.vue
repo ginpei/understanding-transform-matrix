@@ -1,6 +1,14 @@
 <template>
-  <svg class="SvgGraph" width="300" height="300">
-    <SvgGrid />
+  <svg class="SvgGraph"
+    :width="width"
+    :height="height"
+  >
+    <SvgGrid
+      :width="width"
+      :height="height"
+      :posOrigin="posOrigin"
+      :interval="aspectRatio"
+    />
     <g
       :style="{ transform: `translate(${ox}px, ${oy}px)` }"
     >
@@ -72,6 +80,8 @@ export default class SvgGraph extends Vue {
   public colors = colors;
   public aspectRatio = 100;
 
+  @Prop() protected width!: number;
+  @Prop() protected height!: number;
   @Prop() protected posOrigin!: IPos;
   @Prop() protected matrix!: IMatrix;
   @Prop() protected draggingMatrix!: IMatrix;

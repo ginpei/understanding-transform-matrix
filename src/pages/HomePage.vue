@@ -16,6 +16,8 @@
     <div class="HomePage-frameX">
       <div class="HomePage-graphBlock">
         <SvgGraph
+          :width="300"
+          :height="300"
           :draggingMatrix="draggingMatrix"
           :matrix="matrix"
           :onUpdate="graph_onUpdate"
