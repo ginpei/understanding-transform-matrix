@@ -26,14 +26,14 @@
         <circle cx="0" cy="0" r="5" stroke-width="2" fill="#fff"
           :stroke="colors.translation"
         />
-        <SvgHandle title="i"
+        <SvgDragPoint title="i"
           :color="colors.i"
           :x="ix * aspectRatio"
           :y="iy * aspectRatio"
           :onMove="i_onMove"
           :onEnd="i_onEnd"
         />
-        <SvgHandle title="j"
+        <SvgDragPoint title="j"
           :color="colors.j"
           :x="jx * aspectRatio"
           :y="jy * aspectRatio"
@@ -41,7 +41,7 @@
           :onEnd="j_onEnd"
         />
       </g>
-      <SvgHandle title="translate"
+      <SvgDragPoint title="translate"
         :color="colors.translation"
         :x="tx"
         :y="ty"
@@ -58,14 +58,14 @@ import { IMatrix, IPos, colors } from '@/misc';
 import SvgGrid from './SvgGrid.vue';
 import SvgTarget from './SvgTarget.vue';
 import SvgArrow from './SvgArrow.vue';
-import SvgHandle from './SvgHandle.vue';
+import SvgDragPoint from './SvgDragPoint.vue';
 
 @Component({
   components: {
     SvgGrid,
     SvgTarget,
     SvgArrow,
-    SvgHandle,
+    SvgDragPoint,
   },
 })
 export default class SvgGraph extends Vue {

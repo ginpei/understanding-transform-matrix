@@ -1,11 +1,11 @@
 <template>
-  <g class="SvgHandle"
+  <g class="SvgDragPoint"
     :transform="`translate(${x + posDiff.x}, ${y + posDiff.y})`"
   >
-    <text class="SvgHandle-label" x="0.5em" y="-1em"
+    <text class="SvgDragPoint-label" x="0.5em" y="-1em"
       :fill="color"
     >{{ title }} ({{sx}}, {{sy}})</text>
-    <circle class="SvgHandle-circle" r="10" />
+    <circle class="SvgDragPoint-circle" r="10" />
   </g>
 </template>
 
@@ -15,7 +15,7 @@ import DragHandler from '../DragHandler';
 import { IPos, zeroPos, noop, fixMatrixNumber } from '@/misc';
 
 @Component
-export default class SvgHandle extends Vue {
+export default class SvgDragPoint extends Vue {
   @Prop() protected title!: string;
   @Prop() protected color!: string;
   @Prop(Number) protected x!: number;
@@ -71,12 +71,12 @@ export default class SvgHandle extends Vue {
 </script>
 
 <style scoped>
-.SvgHandle-label {
+.SvgDragPoint-label {
   font-size: 10px;
   pointer-events: none;
 }
 
-.SvgHandle-circle {
+.SvgDragPoint-circle {
   animation: blink 1s alternate infinite ease-out;
   cursor: move;
   fill: #0cf9;
