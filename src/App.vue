@@ -26,7 +26,7 @@ export default class App extends Vue {
 }
 
 body {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica", "Arial", "Yu Gothic", sans-serif;
 }
 
 .container {
