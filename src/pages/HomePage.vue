@@ -25,7 +25,12 @@
             :style="{ color: colors.transition }"
           >Transition ({{ tx }}, {{ ty }})</div>
         </div>
-        <p></p>
+        <p>
+          Presets:
+          <button @click="initial_onClick">Initial</button>
+          <button @click="rotate_onClick">Rotate 30°</button>
+          <button @click="flip_onClick">Flip horizontally</button>
+        </p>
       </div>
     </div>
     <p>
@@ -94,6 +99,38 @@ export default class App extends Vue {
   public graph_onUpdate(m: IMatrix, dm: IMatrix) {
     Object.assign(this.matrix, m);
     Object.assign(this.draggingMatrix, dm);
+  }
+
+  public initial_onClick() {
+    Object.assign(this.matrix, {
+      ix: 1, iy: 0,
+      jx: 0, jy: 1,
+      tx: 0, ty: 0,
+    });
+  }
+
+  public rotate_onClick() {
+    Object.assign(this.matrix, {
+      ix: this.cos(30), iy: this.sin(30),
+      jx: this.cos(90 + 30), jy: this.sin(90 + 30),
+      tx: 0, ty: 0,
+    });
+  }
+
+  public flip_onClick() {
+    Object.assign(this.matrix, {
+      ix: -1, iy: 0,
+      jx: 0, jy: 1,
+      tx: 100, ty: 0,
+    });
+  }
+
+  protected cos(deg: number) {
+    return Math.cos(deg / 360 * Math.PI * 2);
+  }
+
+  protected sin(deg: number) {
+    return Math.sin(deg / 360 * Math.PI * 2);
   }
 }
 </script>
