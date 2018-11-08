@@ -51,7 +51,7 @@ export default class GHeader extends Vue {
   height: var(--GHeader-height);
   line-height: var(--GHeader-height);
   left: 0;
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="HomePage container">
-    <GHeader title="Understanding transform: matrix()"
+    <GHeader title="Understanding transform:matrix()"
       :headerLinks="[
         {
           title: 'Code',
@@ -13,7 +13,6 @@
         },
       ]"
     />
-    <h1>Understanding <code>transform: matrix()</code></h1>
     <div class="HomePage-frameX">
       <div class="HomePage-graphBlock">
         <SvgGraph
@@ -151,8 +150,9 @@ export default class App extends Vue {
 </script>
 
 <style scoped>
-/* .HomePage {
-} */
+.HomePage {
+  margin-top: calc(var(--GHeader-height) + 1rem);
+}
 .HomePage-frameX {
   display: flex;
   flex-direction: row;
