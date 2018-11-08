@@ -1,5 +1,18 @@
 <template>
   <div class="HomePage container">
+    <GHeader title="Understanding transform: matrix()"
+      :headerLinks="[
+        {
+          title: 'Code',
+          items: [
+            {
+              title: 'GitHub',
+              href: 'https://github.com/ginpei/understanding-transform-matrix',
+            },
+          ],
+        },
+      ]"
+    />
     <h1>Understanding <code>transform: matrix()</code></h1>
     <div class="HomePage-frameX">
       <div class="HomePage-graphBlock">
@@ -49,11 +62,13 @@ import { Component, Vue } from 'vue-property-decorator';
 import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix, colors } from '@/misc';
 import SvgGraph from '@/components/SvgGraph.vue';
 import MatrixCode from '@/components/MatrixCode.vue';
+import GHeader from '@/components/GHeader.vue';
 
 @Component({
   components: {
     SvgGraph,
     MatrixCode,
+    GHeader,
   },
 })
 export default class App extends Vue {
