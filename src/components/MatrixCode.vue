@@ -15,10 +15,10 @@
           :style="{ color: colors.j }"
         >{{ jy }}</span>,
         <span class="MatrixCode-value"
-          :style="{ color: colors.transition }"
+          :style="{ color: colors.translation }"
         >{{ tx }}</span>,
         <span class="MatrixCode-value"
-          :style="{ color: colors.transition }"
+          :style="{ color: colors.translation }"
         >{{ ty }}</span>);<br/>
       }
     </code>

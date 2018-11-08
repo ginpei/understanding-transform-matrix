@@ -24,7 +24,7 @@
           :y="(jy + djy) * aspectRatio"
         />
         <circle cx="0" cy="0" r="5" stroke-width="2" fill="#fff"
-          :stroke="colors.transition"
+          :stroke="colors.translation"
         />
         <SvgHandle title="i"
           :color="colors.i"
@@ -42,7 +42,7 @@
         />
       </g>
       <SvgHandle title="translate"
-        :color="colors.transition"
+        :color="colors.translation"
         :x="tx"
         :y="ty"
         :onMove="t_onMove"
