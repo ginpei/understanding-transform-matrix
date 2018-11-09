@@ -102,7 +102,7 @@ export default class GHeader extends Vue {
   overflow: hidden;
   position: absolute;
   right: -1px;
-  top: calc(1.4em - 1px);
+  top: calc(var(--GHeader-height) - 1px);
   transition: opacity 200ms;
   min-width: 5em;
   z-index: -1;
