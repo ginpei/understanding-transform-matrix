@@ -90,7 +90,7 @@ export default class App extends Vue {
   protected get ty() { return this.mergedMatrix.ty; }
 
   get sMatrix() {
-    return getMatrixStr(this.matrix, this.draggingMatrix);
+    return getMatrixStr(this.mergedMatrix);
   }
 
   public graph_onUpdate(m: IMatrix, dm: IMatrix) {

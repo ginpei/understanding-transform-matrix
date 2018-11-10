@@ -56,8 +56,8 @@ export const roundMatrix = (m: IMatrix): IMatrix => {
     ty: fixMatrixNumber(m.ty),
   };
 };
-export const getMatrixStr = (m: IMatrix, diff: IMatrix) => {
-  const rm = roundMatrix(mergeMatrix(m, diff));
+export const getMatrixStr = (m: IMatrix) => {
+  const rm = roundMatrix(m);
   return `matrix(${[
     rm.ix, rm.iy,
     rm.jx, rm.jy,

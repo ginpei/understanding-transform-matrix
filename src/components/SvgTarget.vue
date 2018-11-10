@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Prop, Component, Vue } from 'vue-property-decorator';
-import { IMatrix, getMatrixStr } from '@/misc';
+import { IMatrix, getMatrixStr, mergeMatrix } from '@/misc';
 
 @Component({
   components: {
@@ -22,7 +22,7 @@ export default class App extends Vue {
   @Prop() protected draggingMatrix!: IMatrix;
 
   protected get sMatrix() {
-    return getMatrixStr(this.matrix, this.draggingMatrix);
+    return getMatrixStr(mergeMatrix(this.matrix, this.draggingMatrix));
   }
 }
 </script>
