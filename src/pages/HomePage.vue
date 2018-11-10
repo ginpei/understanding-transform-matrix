@@ -63,20 +63,14 @@ import GHeader from '@/components/GHeader.vue';
 })
 export default class App extends Vue {
   protected matrix: IMatrix = {
-    ix: 1,
-    iy: 0,
-    jx: 0,
-    jy: 1,
-    tx: 0,
-    ty: 0,
+    ix: 1, iy: 0,
+    jx: 0, jy: 1,
+    tx: 0, ty: 0,
   };
   protected draggingMatrix: IMatrix = {
-    ix: 0,
-    iy: 0,
-    jx: 0,
-    jy: 0,
-    tx: 0,
-    ty: 0,
+    ix: 0, iy: 0,
+    jx: 0, jy: 0,
+    tx: 0, ty: 0,
   };
 
   protected get mergedMatrix() {
