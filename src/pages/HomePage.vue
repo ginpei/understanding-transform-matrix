@@ -16,12 +16,12 @@
     <div class="HomePage-frameX">
       <div class="HomePage-graphBlock">
         <SvgGraph
-          :width="300"
-          :height="300"
+          :width="width"
+          :height="height"
           :matrix="mergedMatrix"
           :onMove="graph_onMove"
           :onEnd="graph_onEnd"
-          :posOrigin="{ x: 100, y: 100 }"
+          :posOrigin="posOrigin"
         />
       </div>
       <div class="HomePage-dataBlock">
@@ -62,6 +62,10 @@ import GHeader from '@/components/GHeader.vue';
   },
 })
 export default class App extends Vue {
+  protected width = 300;
+  protected height = 300;
+  protected posOrigin: IPos = { x: 100, y: 100 };
+
   protected matrix: IMatrix = {
     ix: 1, iy: 0,
     jx: 0, jy: 1,
