@@ -18,9 +18,9 @@
         <SvgGraph
           :width="300"
           :height="300"
-          :draggingMatrix="draggingMatrix"
-          :matrix="matrix"
-          :onUpdate="graph_onUpdate"
+          :matrix="mergedMatrix"
+          :onMove="graph_onMove"
+          :onEnd="graph_onEnd"
           :posOrigin="{ x: 100, y: 100 }"
         />
       </div>
@@ -93,9 +93,17 @@ export default class App extends Vue {
     return getMatrixStr(this.mergedMatrix);
   }
 
-  public graph_onUpdate(m: IMatrix, dm: IMatrix) {
-    Object.assign(this.matrix, m);
-    Object.assign(this.draggingMatrix, dm);
+  public graph_onMove(diff: IMatrix) {
+    Object.assign(this.draggingMatrix, diff);
+  }
+
+  public graph_onEnd() {
+    this.matrix = mergeMatrix(this.matrix, this.draggingMatrix);
+    this.draggingMatrix = {
+      ix: 0, iy: 0,
+      jx: 0, jy: 0,
+      tx: 0, ty: 0,
+    };
   }
 
   public initial_onClick() {

@@ -13,23 +13,22 @@
       :style="{ transform: `translate(${ox}px, ${oy}px)` }"
     >
       <SvgTarget
-        :draggingMatrix="draggingMatrix"
         :matrix="matrix"
       />
       <g
         :style="{
-          transform: `translate(${tx + dtx}px, ${ty + dty}px)`,
+          transform: `translate(${tx}px, ${ty}px)`,
         }"
       >
         <SvgArrow
           :color="colors.i"
-          :x="(ix + dix) * aspectRatio"
-          :y="(iy + diy) * aspectRatio"
+          :x="(ix) * aspectRatio"
+          :y="(iy) * aspectRatio"
         />
         <SvgArrow
           :color="colors.j"
-          :x="(jx + djx) * aspectRatio"
-          :y="(jy + djy) * aspectRatio"
+          :x="(jx) * aspectRatio"
+          :y="(jy) * aspectRatio"
         />
         <circle cx="0" cy="0" r="5" stroke-width="2" fill="#fff"
           :stroke="colors.translation"
@@ -84,9 +83,8 @@ export default class SvgGraph extends Vue {
   @Prop() protected height!: number;
   @Prop() protected posOrigin!: IPos;
   @Prop() protected matrix!: IMatrix;
-  @Prop() protected draggingMatrix!: IMatrix;
-  @Prop() protected onUpdate!:
-    (m: Partial<IMatrix>, dm: Partial<IMatrix>) => void;
+  @Prop() protected onMove!: (diff: Partial<IMatrix>) => void;
+  @Prop() protected onEnd!: () => void;
 
   // offset
   protected get ox() { return this.posOrigin.x; }
@@ -95,88 +93,46 @@ export default class SvgGraph extends Vue {
   // vector i
   protected get ix() { return this.matrix.ix; }
   protected get iy() { return this.matrix.iy; }
-  protected get dix() { return this.draggingMatrix.ix; }
-  protected get diy() { return this.draggingMatrix.iy; }
 
   // vector j
   protected get jx() { return this.matrix.jx; }
   protected get jy() { return this.matrix.jy; }
-  protected get djx() { return this.draggingMatrix.jx; }
-  protected get djy() { return this.draggingMatrix.jy; }
 
   // transition
   protected get tx() { return this.matrix.tx; }
   protected get ty() { return this.matrix.ty; }
-  protected get dtx() { return this.draggingMatrix.tx; }
-  protected get dty() { return this.draggingMatrix.ty; }
 
   public t_onMove(diff: IPos) {
-    this.onUpdate(
-      {},
-      {
-        tx: diff.x,
-        ty: diff.y,
-      },
-    );
+    this.onMove({
+      tx: diff.x,
+      ty: diff.y,
+    });
   }
 
   public t_onEnd(diff: IPos) {
-    this.onUpdate(
-      {
-        tx: this.tx + diff.x,
-        ty: this.ty + diff.y,
-      },
-      {
-        tx: 0,
-        ty: 0,
-      },
-    );
+    this.onEnd();
   }
 
   public i_onMove(diff: IPos) {
-    this.onUpdate(
-      {},
-      {
-        ix: diff.x / this.aspectRatio,
-        iy: diff.y / this.aspectRatio,
-      },
-    );
+    this.onMove({
+      ix: diff.x / this.aspectRatio,
+      iy: diff.y / this.aspectRatio,
+    });
   }
 
   public i_onEnd(diff: IPos) {
-    this.onUpdate(
-      {
-        ix: this.ix + (diff.x / this.aspectRatio),
-        iy: this.iy + (diff.y / this.aspectRatio),
-      },
-      {
-        ix: 0,
-        iy: 0,
-      },
-    );
+    this.onEnd();
   }
 
   public j_onMove(diff: IPos) {
-    this.onUpdate(
-      {},
-      {
-        jx: diff.x / this.aspectRatio,
-        jy: diff.y / this.aspectRatio,
-      },
-    );
+    this.onMove({
+      jx: diff.x / this.aspectRatio,
+      jy: diff.y / this.aspectRatio,
+    });
   }
 
   public j_onEnd(diff: IPos) {
-    this.onUpdate(
-      {
-        jx: this.jx + (diff.x / this.aspectRatio),
-        jy: this.jy + (diff.y / this.aspectRatio),
-      },
-      {
-        jx: 0,
-        jy: 0,
-      },
-    );
+    this.onEnd();
   }
 }
 </script>

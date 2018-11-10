@@ -1,6 +1,6 @@
 <template>
   <g class="SvgDragPoint"
-    :transform="`translate(${x + posDiff.x}, ${y + posDiff.y})`"
+    :transform="`translate(${x}, ${y})`"
   >
     <text class="SvgDragPoint-label" x="0.5em" y="-1em"
       :fill="color"
@@ -23,17 +23,16 @@ export default class SvgDragPoint extends Vue {
   @Prop({ default: noop }) protected onMove!: (diff: IPos) => void;
   @Prop({ default: noop }) protected onEnd!: (diff: IPos) => void;
 
-  protected posDiff = zeroPos;
   protected dragHandler = new DragHandler();
 
   protected get sx() {
     // TODO remove magic number
-    return fixMatrixNumber((this.x + this.posDiff.x) / 100);
+    return fixMatrixNumber((this.x) / 100);
   }
 
   protected get sy() {
     // TODO remove magic number
-    return fixMatrixNumber((this.y + this.posDiff.y) / 100);
+    return fixMatrixNumber((this.y) / 100);
   }
 
   constructor() {
@@ -53,16 +52,12 @@ export default class SvgDragPoint extends Vue {
   }
 
   public onDragMove(diff: IPos) {
-    this.posDiff = diff;
-
     if (this.onMove) {
       this.onMove(diff);
     }
   }
 
   public onDragEnd(diff: IPos) {
-    this.posDiff = zeroPos;
-
     if (this.onEnd) {
       this.onEnd(diff);
     }
