@@ -4,7 +4,7 @@
   >
     <text class="SvgDragPoint-label" x="0.5em" y="-1em"
       :fill="color"
-    >{{ title }} ({{sx}}, {{sy}})</text>
+    >{{ title }}</text>
     <circle class="SvgDragPoint-circle" r="10" />
   </g>
 </template>

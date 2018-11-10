@@ -33,14 +33,16 @@
         <circle cx="0" cy="0" r="5" stroke-width="2" fill="#fff"
           :stroke="colors.translation"
         />
-        <SvgDragPoint title="i"
+        <SvgDragPoint
+          :title="`i (${ix}, ${iy})`"
           :color="colors.i"
           :x="ix * aspectRatio"
           :y="iy * aspectRatio"
           :onMove="i_onMove"
           :onEnd="i_onEnd"
         />
-        <SvgDragPoint title="j"
+        <SvgDragPoint
+          :title="`j (${jx}, ${jy})`"
           :color="colors.j"
           :x="jx * aspectRatio"
           :y="jy * aspectRatio"
@@ -48,7 +50,8 @@
           :onEnd="j_onEnd"
         />
       </g>
-      <SvgDragPoint title="translate"
+      <SvgDragPoint
+        :title="`translate (${tx}, ${ty})`"
         :color="colors.translation"
         :x="tx"
         :y="ty"
