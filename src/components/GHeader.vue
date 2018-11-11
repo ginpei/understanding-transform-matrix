@@ -1,6 +1,6 @@
 <template>
   <div class="GHeader">
-    <div class="GHeader-container container">
+    <div class="GHeader-container">
       <a :href="titleLink" class="GHeader-logo">{{ title }}</a>
       <div class="GHeader-linkBlock">
         <div class="GHeader-linkGroup"
@@ -54,6 +54,7 @@ export default class GHeader extends Vue {
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 1;
 }
 
 .GHeader a {

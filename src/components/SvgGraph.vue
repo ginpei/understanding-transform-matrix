@@ -1,5 +1,6 @@
 <template>
   <svg class="SvgGraph"
+    :style="{ top: `${positionTop}px` }"
     :width="width"
     :height="height"
   >
@@ -84,6 +85,7 @@ export default class SvgGraph extends Vue {
 
   @Prop() protected width!: number;
   @Prop() protected height!: number;
+  @Prop() protected positionTop!: number;
   @Prop() protected posOrigin!: IPos;
   @Prop() protected matrix!: IMatrix;
   @Prop() protected onMove!: (diff: Partial<IMatrix>) => void;
@@ -142,6 +144,7 @@ export default class SvgGraph extends Vue {
 
 <style scoped>
 .SvgGraph {
-  box-shadow: 0 0 10px #0009;
+  left: 0;
+  position: absolute;
 }
 </style>

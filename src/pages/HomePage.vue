@@ -1,6 +1,6 @@
 <template>
   <div class="HomePage container">
-    <GHeader title="Understanding transform:matrix()"
+    <GHeader ref="header" title="Understanding transform:matrix()"
       :headerLinks="[
         {
           title: 'Code',
@@ -13,16 +13,17 @@
         },
       ]"
     />
-    <div class="HomePage-frameX">
+    <SvgGraph
+      :width="graphWidth"
+      :height="graphHeight"
+      :positionTop="graphTop"
+      :matrix="mergedMatrix"
+      :onMove="graph_onMove"
+      :onEnd="graph_onEnd"
+      :posOrigin="posOrigin"
+    />
+    <div class="HomePage-controlPanel">
       <div class="HomePage-graphBlock">
-        <SvgGraph
-          :width="width"
-          :height="height"
-          :matrix="mergedMatrix"
-          :onMove="graph_onMove"
-          :onEnd="graph_onEnd"
-          :posOrigin="posOrigin"
-        />
       </div>
       <div class="HomePage-dataBlock">
         <p>
@@ -35,15 +36,14 @@
           :matrix="mergedMatrix"
         />
       </div>
+      <p class="HomePage-links">
+        Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&amp;Action_id=121&amp;Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
+        (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
+        <br/>
+        Recommend to read:
+        <a href="http://www.ajimatics.com/entry/2018/10/31/060000">線形代数の知識ゼロから始めて行列式「だけ」理解する - アジマティクス</a>
+      </p>
     </div>
-    <p>
-      Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&amp;Action_id=121&amp;Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
-      (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
-    </p>
-    <p>
-      Recommend to read:
-      <a href="http://www.ajimatics.com/entry/2018/10/31/060000">線形代数の知識ゼロから始めて行列式「だけ」理解する - アジマティクス</a>
-    </p>
   </div>
 </template>
 
@@ -62,8 +62,13 @@ import GHeader from '@/components/GHeader.vue';
   },
 })
 export default class App extends Vue {
-  protected width = 300;
-  protected height = 300;
+  public $refs!: {
+    header: Vue;
+  };
+
+  protected graphWidth = 0;
+  protected graphHeight = 0;
+  protected graphTop = 0;
   protected posOrigin: IPos = { x: 100, y: 100 };
 
   protected matrix: IMatrix = {
@@ -95,6 +100,21 @@ export default class App extends Vue {
 
   get sMatrix() {
     return getMatrixStr(this.mergedMatrix);
+  }
+
+  public mounted() {
+    window.addEventListener('resize', this.window_onResize);
+    window.document.body.setAttribute('data-page', 'HomePage');
+    this.updateSize();
+  }
+
+  public destroyed() {
+    window.removeEventListener('resize', this.window_onResize);
+    window.document.body.removeAttribute('data-page');
+  }
+
+  public window_onResize() {
+    this.updateSize();
   }
 
   public graph_onMove(diff: IMatrix) {
@@ -134,6 +154,12 @@ export default class App extends Vue {
     });
   }
 
+  protected updateSize() {
+    this.graphTop = this.$refs.header.$el.clientHeight;
+    this.graphWidth = document.documentElement.clientWidth;
+    this.graphHeight = document.documentElement.clientHeight - this.graphTop;
+  }
+
   protected cos(deg: number) {
     return Math.cos(deg / 360 * Math.PI * 2);
   }
@@ -144,22 +170,29 @@ export default class App extends Vue {
 }
 </script>
 
-<style scoped>
+<style>
+body[data-page="HomePage"] {
+  overflow: hidden;
+}
 .HomePage {
   margin-top: calc(var(--GHeader-height) + 1rem);
 }
-.HomePage-frameX {
-  display: flex;
-  flex-direction: row;
-}
-.HomePage-graphBlock {
-  text-align: center;
-  flex: 1;
-}
-.HomePage-dataBlock {
-  flex: 1;
+.HomePage-controlPanel {
+  background: #ccc9;
+  border-top: 1px solid #ccc;
+  bottom: 0;
+  box-sizing: border-box;
+  box-shadow: 0 -1px 5px #0003;
+  left: 0;
+  overflow: auto;
+  padding: 0.4em;
+  position: absolute;
+  width: 100%;
 }
 .HomePage-position {
   font-weight: bold;
+}
+.HomePage-links {
+  font-size: 10px;
 }
 </style>
