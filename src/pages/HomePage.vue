@@ -155,9 +155,14 @@ export default class App extends Vue {
   }
 
   protected updateSize() {
+    const el = window.document.documentElement;
+    if (!el) {
+      return;
+    }
+
     this.graphTop = this.$refs.header.$el.clientHeight;
-    this.graphWidth = document.documentElement.clientWidth;
-    this.graphHeight = document.documentElement.clientHeight - this.graphTop;
+    this.graphWidth = el.clientWidth;
+    this.graphHeight = el.clientHeight - this.graphTop;
   }
 
   protected cos(deg: number) {
