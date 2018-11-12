@@ -14,6 +14,7 @@
           <button class="HomeFloatingPanel-presetButton" @click="initial_onClick">Initial</button>
           <button class="HomeFloatingPanel-presetButton" @click="rotate_onClick">Rotate 30°</button>
           <button class="HomeFloatingPanel-presetButton" @click="flip_onClick">Flip horizontally</button>
+          <button class="HomeFloatingPanel-presetButton" @click="bigger_onClick">Twice bigger</button>
         </p>
       </div>
       <div class="HomeFloatingPanel-tabPage" data-name="references">
@@ -100,6 +101,16 @@ export default class HomeFloatingPanel extends Vue {
         ix: -1, iy: 0,
         jx: 0, jy: 1,
         tx: 100, ty: 0,
+      },
+    });
+  }
+
+  public bigger_onClick() {
+    this.onPreset({
+      matrix: {
+        ix: 2, iy: 0,
+        jx: 0, jy: 2,
+        tx: 0, ty: 0,
       },
     });
   }
