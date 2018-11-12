@@ -65,7 +65,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { IMatrix } from '@/misc';
 import MatrixCode from '@/components/MatrixCode.vue';
 
-export const defaultTabName = 'code';
+export enum TabName {
+  code = 'code',
+  presets = 'presets',
+  references = 'references',
+}
+export const defaultTabName = TabName.code;
 
 @Component({
   components: {
@@ -75,14 +80,14 @@ export const defaultTabName = 'code';
 export default class HomeFloatingPanel extends Vue {
   @Prop() protected matrix!: IMatrix;
   @Prop() protected onPreset!: (data: { matrix: IMatrix }) => void;
-  @Prop() protected curTab!: string;
-  @Prop() protected onTabChange!: (data: { name: string }) => void;
+  @Prop() protected curTab!: TabName;
+  @Prop() protected onTabChange!: (data: { name: TabName }) => void;
 
   protected defaultTabName = defaultTabName;
 
   public tabButton_onClick(event: MouseEvent) {
     const el = event.currentTarget as HTMLSpanElement;
-    const name = el.getAttribute('data-name')!;
+    const name = el.getAttribute('data-name') as TabName; // :)
     this.onTabChange({ name });
   }
 

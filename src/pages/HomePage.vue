@@ -41,7 +41,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix } from '@/misc';
 import SvgGraph from '@/components/SvgGraph.vue';
 import GHeader from '@/components/GHeader.vue';
-import HomeFloatingPanel, { defaultTabName } from '@/components/HomeFloatingPanel.vue';
+import HomeFloatingPanel, { TabName, defaultTabName } from '@/components/HomeFloatingPanel.vue';
 
 @Component({
   components: {
@@ -119,6 +119,7 @@ export default class App extends Vue {
 
   public graph_onMove(diff: IMatrix) {
     this.pointIndicatorVisible = false;
+    this.curTab = TabName.code;
     Object.assign(this.draggingMatrix, diff);
   }
 
@@ -143,7 +144,7 @@ export default class App extends Vue {
     this.posOriginDiff.y = 0;
   }
 
-  public floatingPanel_onTabChange(data: { name: string }) {
+  public floatingPanel_onTabChange(data: { name: TabName }) {
     this.curTab = data.name;
   }
 
