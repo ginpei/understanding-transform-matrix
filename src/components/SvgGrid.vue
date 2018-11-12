@@ -44,7 +44,8 @@ export default class SvgGrid extends Vue {
 
   protected get hLines() {
     const length = Math.ceil(this.height / this.interval);
-    const offset = this.posOrigin.y % this.interval;
+    const offset = this.posOrigin.y % this.interval +
+      (this.posOrigin.y > 0 ? 0 : this.interval);
     return [...Array(length)].map((_, i) => ({
       x1: 0,
       y1: offset + i * this.interval,
@@ -55,7 +56,8 @@ export default class SvgGrid extends Vue {
 
   protected get vLines() {
     const length = Math.ceil(this.width / this.interval);
-    const offset = this.posOrigin.x % this.interval;
+    const offset = this.posOrigin.x % this.interval +
+      (this.posOrigin.x > 0 ? 0 : this.interval);
     return [...Array(length)].map((_, i) => ({
       x1: offset + i * this.interval,
       y1: 0,
