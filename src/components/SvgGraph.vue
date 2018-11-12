@@ -132,7 +132,7 @@ export default class SvgGraph extends Vue {
       el: this.$el,
       onEnd: (diff) => this.onOriginMoveEnd(),
       onMove: (diff) => this.onOriginMove(diff),
-      onStart: (data) => this.onDragStart(data),
+      onStart: (data) => this.onOriginMoveStart(data),
     });
   }
 
@@ -140,7 +140,7 @@ export default class SvgGraph extends Vue {
     this.dragHandler.stop();
   }
 
-  public onDragStart(data: { event: MouseEvent | TouchEvent, stop: () => void }) {
+  public onOriginMoveStart(data: { event: MouseEvent | TouchEvent, stop: () => void }) {
     if (data.event.target !== this.$el) {
       data.stop();
     }
