@@ -70,6 +70,9 @@ export default class SvgDragPoint extends Vue {
 </script>
 
 <style scoped>
+.SvgDragPoint {
+  cursor: move;
+}
 .SvgDragPoint-label {
   font-size: 10px;
   font-weight: bold;
@@ -87,7 +90,6 @@ export default class SvgDragPoint extends Vue {
 
 .SvgDragPoint-circle {
   animation: SvgDragPoint-blink 3s infinite ease-in;
-  cursor: move;
   fill: var(--color-xxx-1);
   stroke-width: 0;
 }
