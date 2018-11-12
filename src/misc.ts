@@ -66,5 +66,5 @@ export const getMatrixStr = (m: IMatrix) => {
 };
 
 export const fixMatrixNumber = (n: number) => {
-  return Number(n.toFixed(3));
+  return Number(n.toFixed(2));
 };
