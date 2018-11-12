@@ -69,7 +69,7 @@ export default class SvgDragPoint extends Vue {
 }
 </script>
 
-<style scoped>
+<style>
 .SvgDragPoint {
   cursor: move;
 }

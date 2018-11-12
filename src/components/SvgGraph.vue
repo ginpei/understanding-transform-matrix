@@ -177,7 +177,7 @@ export default class SvgGraph extends Vue {
 }
 </script>
 
-<style scoped>
+<style>
 .SvgGraph {
   left: 0;
   position: absolute;
