@@ -27,7 +27,9 @@
     />
     <div class="HomePage-controlPanel">
       <HomeFloatingPanel
+        :curTab="curTab"
         :matrix="mergedMatrix"
+        :onTabChange="floatingPanel_onTabChange"
         :onPreset="floatingPanel_onPreset"
       />
     </div>
@@ -39,7 +41,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix } from '@/misc';
 import SvgGraph from '@/components/SvgGraph.vue';
 import GHeader from '@/components/GHeader.vue';
-import HomeFloatingPanel from '@/components/HomeFloatingPanel.vue';
+import HomeFloatingPanel, { defaultTabName } from '@/components/HomeFloatingPanel.vue';
 
 @Component({
   components: {
@@ -60,6 +62,7 @@ export default class App extends Vue {
   protected posInitialOrigin: IPos = { x: 100, y: 100 };
   protected posOrigin: IPos = Object.assign({}, this.posInitialOrigin);
   protected posOriginDiff: IPos = { x: 0, y: 0 };
+  protected curTab = defaultTabName;
 
   protected get mergedOrigin(): IPos {
     return {
@@ -138,6 +141,10 @@ export default class App extends Vue {
     this.posOrigin.y += this.posOriginDiff.y;
     this.posOriginDiff.x = 0;
     this.posOriginDiff.y = 0;
+  }
+
+  public floatingPanel_onTabChange(data: { name: string }) {
+    this.curTab = data.name;
   }
 
   public floatingPanel_onPreset(data: { matrix: IMatrix }) {

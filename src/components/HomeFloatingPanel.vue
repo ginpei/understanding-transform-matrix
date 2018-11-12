@@ -3,7 +3,9 @@
     :data-page="curTab"
   >
     <div class="HomeFloatingPanel-tabPages">
-      <article class="HomeFloatingPanel-tabPage" data-name="code">
+      <article class="HomeFloatingPanel-tabPage"
+        :data-name="defaultTabName"
+      >
         <h1 class="HomeFloatingPanel-tabPageHeading">Code</h1>
         <MatrixCode
           :matrix="matrix"
@@ -38,7 +40,8 @@
       </article>
     </div>
     <div class="HomeFloatingPanel-tabs">
-      <span class="HomeFloatingPanel-tabButton" data-name="code"
+      <span class="HomeFloatingPanel-tabButton"
+        :data-name="defaultTabName"
         @click="tabButton_onClick"
       >
         <img class="HomeFloatingPanel-tabButtonImage" src="/code-solid.svg" width="auto" height="16" alt="Code" />
@@ -62,6 +65,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { IMatrix } from '@/misc';
 import MatrixCode from '@/components/MatrixCode.vue';
 
+export const defaultTabName = 'code';
+
 @Component({
   components: {
     MatrixCode,
@@ -70,13 +75,15 @@ import MatrixCode from '@/components/MatrixCode.vue';
 export default class HomeFloatingPanel extends Vue {
   @Prop() protected matrix!: IMatrix;
   @Prop() protected onPreset!: (data: { matrix: IMatrix }) => void;
+  @Prop() protected curTab!: string;
+  @Prop() protected onTabChange!: (data: { name: string }) => void;
 
-  protected curTab = 'code';
+  protected defaultTabName = defaultTabName;
 
   public tabButton_onClick(event: MouseEvent) {
     const el = event.currentTarget as HTMLSpanElement;
     const name = el.getAttribute('data-name')!;
-    this.curTab = name;
+    this.onTabChange({ name });
   }
 
   public initial_onClick() {
