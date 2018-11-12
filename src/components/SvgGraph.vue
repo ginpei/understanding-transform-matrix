@@ -144,11 +144,10 @@ export default class SvgGraph extends Vue {
     if (data.event.target !== this.$el) {
       data.stop();
     }
-
-    this.dragging = true;
   }
 
   public t_onMove(diff: IPos) {
+    this.dragging = true;
     this.onMove({
       tx: diff.x,
       ty: diff.y,
@@ -156,6 +155,7 @@ export default class SvgGraph extends Vue {
   }
 
   public i_onMove(diff: IPos) {
+    this.dragging = true;
     this.onMove({
       ix: diff.x / this.aspectRatio,
       iy: diff.y / this.aspectRatio,
@@ -163,6 +163,7 @@ export default class SvgGraph extends Vue {
   }
 
   public j_onMove(diff: IPos) {
+    this.dragging = true;
     this.onMove({
       jx: diff.x / this.aspectRatio,
       jy: diff.y / this.aspectRatio,
