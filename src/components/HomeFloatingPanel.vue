@@ -29,7 +29,7 @@
           </li>
           <li class="HomeFloatingPanel-referenceItem">
             Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&amp;Action_id=121&amp;Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
-            (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
+            (or <a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle version</a>)
           </li>
           <li class="HomeFloatingPanel-referenceItem">
             SVG icons from <a href="https://fontawesome.com/license">Font Awesome</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
