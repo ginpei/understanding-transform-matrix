@@ -5,6 +5,7 @@
     <text class="SvgDragPoint-label" x="0.5em" y="-1em"
       :fill="color"
     >{{ title }}</text>
+    <circle class="SvgDragPoint-touchArea" r="30" />
     <circle class="SvgDragPoint-circle" r="10" />
   </g>
 </template>
@@ -77,16 +78,20 @@ export default class SvgDragPoint extends Vue {
   pointer-events: none;
 }
 
+.SvgDragPoint-touchArea {
+  fill: transparent;
+}
+
 .SvgDragPoint-circle {
-  animation: blink 1s alternate infinite ease-out;
+  animation: SvgDragPoint-blink 1s alternate infinite ease-out;
   cursor: move;
   fill: #0cf9;
   stroke-width: 0;
 }
 
-@keyframes blink {
-  0% { opacity: 1 }
-  50% { opacity: 0 }
-  100% { opacity: 0 }
+@keyframes SvgDragPoint-blink {
+  0% { opacity: 1; transform: scale(2); }
+  40% { opacity: 0; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
 }
 </style>

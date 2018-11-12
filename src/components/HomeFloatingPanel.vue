@@ -11,9 +11,9 @@
       <div class="HomeFloatingPanel-tabPage" data-name="presets">
         <p>
           Presets:
-          <button @click="initial_onClick">Initial</button>
-          <button @click="rotate_onClick">Rotate 30°</button>
-          <button @click="flip_onClick">Flip horizontally</button>
+          <button class="HomeFloatingPanel-presetButton" @click="initial_onClick">Initial</button>
+          <button class="HomeFloatingPanel-presetButton" @click="rotate_onClick">Rotate 30°</button>
+          <button class="HomeFloatingPanel-presetButton" @click="flip_onClick">Flip horizontally</button>
         </p>
       </div>
       <div class="HomeFloatingPanel-tabPage" data-name="references">
@@ -128,5 +128,10 @@ export default class HomeFloatingPanel extends Vue {
 .HomeFloatingPanel[data-page="references"]
   .HomeFloatingPanel-tabPage[data-name="references"] {
   display: block;
+}
+
+.HomeFloatingPanel-presetButton {
+  height: 3em;
+  margin: 0.1em;
 }
 </style>
