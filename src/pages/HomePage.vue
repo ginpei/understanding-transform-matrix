@@ -119,8 +119,11 @@ export default class App extends Vue {
 
   public graph_onMove(diff: IMatrix) {
     this.pointIndicatorVisible = false;
-    this.curTab = TabName.code;
     Object.assign(this.draggingMatrix, diff);
+
+    if (this.curTab !== TabName.hide) {
+      this.curTab = TabName.code;
+    }
   }
 
   public graph_onEnd() {
@@ -145,7 +148,11 @@ export default class App extends Vue {
   }
 
   public floatingPanel_onTabChange(data: { name: TabName }) {
-    this.curTab = data.name;
+    if (this.curTab === data.name) {
+      this.curTab = TabName.hide;
+    } else {
+      this.curTab = data.name;
+    }
   }
 
   public floatingPanel_onPreset(data: { matrix: IMatrix }) {

@@ -66,6 +66,7 @@ import { IMatrix } from '@/misc';
 import MatrixCode from '@/components/MatrixCode.vue';
 
 export enum TabName {
+  hide = 'hide',
   code = 'code',
   presets = 'presets',
   references = 'references',
