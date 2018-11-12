@@ -64,7 +64,7 @@ import MatrixCode from '@/components/MatrixCode.vue';
 })
 export default class HomeFloatingPanel extends Vue {
   @Prop() protected matrix!: IMatrix;
-  @Prop() protected onPreset!: (data: { type: string }) => void;
+  @Prop() protected onPreset!: (data: { matrix: IMatrix }) => void;
 
   protected curTab = 'code';
 
@@ -75,15 +75,41 @@ export default class HomeFloatingPanel extends Vue {
   }
 
   public initial_onClick() {
-    this.onPreset({ type: 'initial' });
+    this.onPreset({
+      matrix: {
+        ix: 1, iy: 0,
+        jx: 0, jy: 1,
+        tx: 0, ty: 0,
+      },
+    });
   }
 
   public rotate_onClick() {
-    this.onPreset({ type: 'rotate' });
+    this.onPreset({
+      matrix: {
+        ix: this.cos(30), iy: this.sin(30),
+        jx: this.cos(90 + 30), jy: this.sin(90 + 30),
+        tx: 0, ty: 0,
+      },
+    });
   }
 
   public flip_onClick() {
-    this.onPreset({ type: 'flip' });
+    this.onPreset({
+      matrix: {
+        ix: -1, iy: 0,
+        jx: 0, jy: 1,
+        tx: 100, ty: 0,
+      },
+    });
+  }
+
+  protected cos(deg: number) {
+    return Math.cos(deg / 360 * Math.PI * 2);
+  }
+
+  protected sin(deg: number) {
+    return Math.sin(deg / 360 * Math.PI * 2);
   }
 }
 </script>

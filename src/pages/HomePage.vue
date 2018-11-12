@@ -137,30 +137,9 @@ export default class App extends Vue {
     this.posOriginDiff.y = 0;
   }
 
-  public floatingPanel_onPreset(data: { type: string }) {
-    const { type } = data;
-    if (type === 'initial') {
-      Object.assign(this.posOrigin, this.posInitialOrigin);
-      Object.assign(this.matrix, {
-        ix: 1, iy: 0,
-        jx: 0, jy: 1,
-        tx: 0, ty: 0,
-      });
-    } else if (type === 'rotate') {
-      Object.assign(this.posOrigin, this.posInitialOrigin);
-      Object.assign(this.matrix, {
-        ix: this.cos(30), iy: this.sin(30),
-        jx: this.cos(90 + 30), jy: this.sin(90 + 30),
-        tx: 0, ty: 0,
-      });
-    } else if (type === 'flip') {
-      Object.assign(this.posOrigin, this.posInitialOrigin);
-      Object.assign(this.matrix, {
-        ix: -1, iy: 0,
-        jx: 0, jy: 1,
-        tx: 100, ty: 0,
-      });
-    }
+  public floatingPanel_onPreset(data: { matrix: IMatrix }) {
+    Object.assign(this.posOrigin, this.posInitialOrigin);
+    Object.assign(this.matrix, data.matrix);
   }
 
   protected updateSize() {
@@ -172,14 +151,6 @@ export default class App extends Vue {
     this.graphTop = this.$refs.header.$el.clientHeight;
     this.graphWidth = el.clientWidth;
     this.graphHeight = el.clientHeight - this.graphTop;
-  }
-
-  protected cos(deg: number) {
-    return Math.cos(deg / 360 * Math.PI * 2);
-  }
-
-  protected sin(deg: number) {
-    return Math.sin(deg / 360 * Math.PI * 2);
   }
 }
 </script>
