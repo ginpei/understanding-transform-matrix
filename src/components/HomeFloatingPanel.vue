@@ -3,35 +3,35 @@
     :data-page="curTab"
   >
     <div class="HomeFloatingPanel-tabPages">
-      <div class="HomeFloatingPanel-tabPage" data-name="code">
+      <article class="HomeFloatingPanel-tabPage" data-name="code">
+        <h1 class="HomeFloatingPanel-tabPageHeading">Code</h1>
         <MatrixCode
           :matrix="matrix"
         />
-      </div>
-      <div class="HomeFloatingPanel-tabPage" data-name="presets">
-        <p>
-          Presets:
-          <button class="HomeFloatingPanel-presetButton" @click="initial_onClick">Initial</button>
-          <button class="HomeFloatingPanel-presetButton" @click="rotate_onClick">Rotate 30°</button>
-          <button class="HomeFloatingPanel-presetButton" @click="flip_onClick">Flip horizontally</button>
-          <button class="HomeFloatingPanel-presetButton" @click="larger_onClick">Twice larger</button>
-        </p>
-      </div>
-      <div class="HomeFloatingPanel-tabPage" data-name="references">
-        <ul>
-          <li>
+      </article>
+      <article class="HomeFloatingPanel-tabPage" data-name="presets">
+        <h1 class="HomeFloatingPanel-tabPageHeading">Presets</h1>
+        <button class="HomeFloatingPanel-presetButton" @click="initial_onClick">Initial</button>
+        <button class="HomeFloatingPanel-presetButton" @click="rotate_onClick">Rotate 30°</button>
+        <button class="HomeFloatingPanel-presetButton" @click="flip_onClick">Flip horizontally</button>
+        <button class="HomeFloatingPanel-presetButton" @click="larger_onClick">Twice larger</button>
+      </article>
+      <article class="HomeFloatingPanel-tabPage" data-name="references">
+        <h1 class="HomeFloatingPanel-tabPageHeading">References</h1>
+        <ul class="HomeFloatingPanel-referenceList">
+          <li class="HomeFloatingPanel-referenceItem">
             Recommend to read:
             <a href="http://www.ajimatics.com/entry/2018/10/31/060000">線形代数の知識ゼロから始めて行列式「だけ」理解する - アジマティクス</a>
           </li>
-          <li>
+          <li class="HomeFloatingPanel-referenceItem">
             Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&amp;Action_id=121&amp;Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
             (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
           </li>
-          <li>
+          <li class="HomeFloatingPanel-referenceItem">
             SVG icons from <a href="https://fontawesome.com/license">Font Awesome</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
           </li>
         </ul>
-      </div>
+      </article>
     </div>
     <div class="HomeFloatingPanel-tabs">
       <span class="HomeFloatingPanel-tabButton" data-name="code"
@@ -148,7 +148,7 @@ export default class HomeFloatingPanel extends Vue {
 .HomeFloatingPanel[data-page="references"]
   .HomeFloatingPanel-tabButton[data-name="references"] {
   background-image: radial-gradient(ellipse at center 80%,
-  var(--color-xxx-1) 0%, var(--color-xxx-1) 5%, transparent 20%);
+    var(--color-xxx-1) 0%, var(--color-xxx-1) 5%, transparent 20%);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 120px 30px;
@@ -159,6 +159,7 @@ export default class HomeFloatingPanel extends Vue {
 
 .HomeFloatingPanel-tabPage {
   display: none;
+  min-height: 90px;
   padding: 0.4em;
 }
 .HomeFloatingPanel[data-page="code"]
@@ -170,8 +171,21 @@ export default class HomeFloatingPanel extends Vue {
   display: block;
 }
 
+.HomeFloatingPanel-tabPageHeading {
+  font-size: 1em;
+  margin: 0;
+}
+
 .HomeFloatingPanel-presetButton {
   height: 3em;
   margin: 0.1em;
+}
+.HomeFloatingPanel-referenceList {
+  margin: 0;
+}
+.HomeFloatingPanel-referenceItem {
+  font-size: 0.8em;
+  margin: 0.5em 0;
+  line-height: 1em;
 }
 </style>

@@ -47,7 +47,6 @@ export default class SvgGraph extends Vue {
 <style>
 .MatrixCode {
   background: #f0f0f0;
-  margin: 1em 0;
   overflow: auto;
   padding: 0.5em;
   white-space: nowrap;
