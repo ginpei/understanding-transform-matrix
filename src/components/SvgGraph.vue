@@ -65,7 +65,9 @@
     </g>
     <g
       v-show="pointIndicatorVisible"
-      :transform="`translate(${posOrigin.x + (matrix.ix * 100) - (30 / 2)} ${posOrigin.y})`"
+      :transform="`translate(
+        ${posOrigin.x + matrix.tx + (matrix.ix * 100) - (30 / 2)}
+        ${posOrigin.y + matrix.ty + (matrix.iy * 100)})`"
     >
       <image class="SvgGraph-pointIndicator"
         href="/hand-point-up-regular.svg" width="30" height="30"
