@@ -44,9 +44,7 @@
         :data-name="defaultTabName"
         @click="tabButton_onClick"
       >
-        <img class="HomeFloatingPanel-tabButtonImage" width="auto" height="16" alt="Code"
-           :src="require('@/svg/code-solid.svg')"
-        />
+        <img class="HomeFloatingPanel-tabButtonImage" src="/code-solid.svg" width="auto" height="16" alt="Code" />
       </span>
       <span class="HomeFloatingPanel-tabButton" data-name="presets"
         @click="tabButton_onClick"
