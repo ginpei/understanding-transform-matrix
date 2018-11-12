@@ -17,7 +17,7 @@ import { IMatrix, getMatrixStr } from '@/misc';
   components: {
   },
 })
-export default class App extends Vue {
+export default class SvgTarget extends Vue {
   @Prop() protected matrix!: IMatrix;
 
   protected get sMatrix() {

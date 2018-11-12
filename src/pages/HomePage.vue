@@ -50,7 +50,7 @@ import HomeFloatingPanel, { TabName, defaultTabName } from '@/components/HomeFlo
     HomeFloatingPanel,
   },
 })
-export default class App extends Vue {
+export default class HomePage extends Vue {
   public $refs!: {
     header: Vue;
   };
