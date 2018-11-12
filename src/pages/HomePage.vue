@@ -20,7 +20,9 @@
       :matrix="mergedMatrix"
       :onMove="graph_onMove"
       :onEnd="graph_onEnd"
-      :posOrigin="posOrigin"
+      :onOriginMove="graph_onOriginMove"
+      :onOriginMoveEnd="graph_onOriginMoveEnd"
+      :posOrigin="mergedOrigin"
     />
     <div class="HomePage-controlPanel">
       <div class="HomePage-graphBlock">
@@ -69,7 +71,16 @@ export default class App extends Vue {
   protected graphWidth = 0;
   protected graphHeight = 0;
   protected graphTop = 0;
-  protected posOrigin: IPos = { x: 100, y: 100 };
+  protected posInitialOrigin: IPos = { x: 100, y: 100 };
+  protected posOrigin: IPos = Object.assign({}, this.posInitialOrigin);
+  protected posOriginDiff: IPos = { x: 0, y: 0 };
+
+  protected get mergedOrigin(): IPos {
+    return {
+      x: this.posOrigin.x + this.posOriginDiff.x,
+      y: this.posOrigin.y + this.posOriginDiff.y,
+    };
+  }
 
   protected matrix: IMatrix = {
     ix: 1, iy: 0,
@@ -130,7 +141,20 @@ export default class App extends Vue {
     };
   }
 
+  public graph_onOriginMove(diff: IPos) {
+    this.posOriginDiff.x = diff.x;
+    this.posOriginDiff.y = diff.y;
+  }
+
+  public graph_onOriginMoveEnd() {
+    this.posOrigin.x += this.posOriginDiff.x;
+    this.posOrigin.y += this.posOriginDiff.y;
+    this.posOriginDiff.x = 0;
+    this.posOriginDiff.y = 0;
+  }
+
   public initial_onClick() {
+    Object.assign(this.posOrigin, this.posInitialOrigin);
     Object.assign(this.matrix, {
       ix: 1, iy: 0,
       jx: 0, jy: 1,
@@ -139,6 +163,7 @@ export default class App extends Vue {
   }
 
   public rotate_onClick() {
+    Object.assign(this.posOrigin, this.posInitialOrigin);
     Object.assign(this.matrix, {
       ix: this.cos(30), iy: this.sin(30),
       jx: this.cos(90 + 30), jy: this.sin(90 + 30),
@@ -147,6 +172,7 @@ export default class App extends Vue {
   }
 
   public flip_onClick() {
+    Object.assign(this.posOrigin, this.posInitialOrigin);
     Object.assign(this.matrix, {
       ix: -1, iy: 0,
       jx: 0, jy: 1,

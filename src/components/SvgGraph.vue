@@ -70,6 +70,7 @@ import SvgGrid from './SvgGrid.vue';
 import SvgTarget from './SvgTarget.vue';
 import SvgArrow from './SvgArrow.vue';
 import SvgDragPoint from './SvgDragPoint.vue';
+import DragHandler from '../DragHandler';
 
 @Component({
   components: {
@@ -90,6 +91,10 @@ export default class SvgGraph extends Vue {
   @Prop() protected matrix!: IMatrix;
   @Prop() protected onMove!: (diff: Partial<IMatrix>) => void;
   @Prop() protected onEnd!: () => void;
+  @Prop() protected onOriginMove!: (diff: IPos) => void;
+  @Prop() protected onOriginMoveEnd!: () => void;
+
+  protected dragHandler = new DragHandler();
 
   // offset
   protected get ox() { return this.posOrigin.x; }
@@ -106,6 +111,25 @@ export default class SvgGraph extends Vue {
   // transition
   protected get tx() { return this.matrix.tx; }
   protected get ty() { return this.matrix.ty; }
+
+  public mounted() {
+    this.dragHandler.start({
+      el: this.$el,
+      onEnd: (diff) => this.onOriginMoveEnd(),
+      onMove: (diff) => this.onOriginMove(diff),
+      onStart: (data) => this.onDragStart(data),
+    });
+  }
+
+  public destroyed() {
+    this.dragHandler.stop();
+  }
+
+  public onDragStart(data: { event: MouseEvent | TouchEvent, stop: () => void }) {
+    if (data.event.target !== this.$el) {
+      data.stop();
+    }
+  }
 
   public t_onMove(diff: IPos) {
     this.onMove({

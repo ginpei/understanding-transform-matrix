@@ -7,6 +7,7 @@ export default class DragHandler {
   protected lastPos = invalidPos;
   protected onEnd: ((diff: IPos) => void) | undefined = undefined;
   protected onMove: ((diff: IPos) => void) | undefined = undefined;
+  protected onStart: ((data: { event: MouseEvent | TouchEvent, stop: () => void }) => void) | undefined = undefined;
 
   public get dragging() {
     return this._dragging;
@@ -25,10 +26,12 @@ export default class DragHandler {
     el: HTMLElement,
     onEnd?: (diff: IPos) => void,
     onMove?: (diff: IPos) => void,
+    onStart?: (data: { event: MouseEvent | TouchEvent, stop: () => void }) => void,
   }) {
     this.el = options.el;
     this.onEnd = options.onEnd;
     this.onMove = options.onMove;
+    this.onStart = options.onStart;
 
     this.el.addEventListener('mousedown', this.onMouseDown);
     document.addEventListener('mousemove', this.onMouseMove);
@@ -57,7 +60,7 @@ export default class DragHandler {
     event.preventDefault();
 
     const [pos] = getEventPositions(event);
-    this.startDragging(pos);
+    this.startDragging(event, pos);
   }
 
   public onMouseMove = (event: MouseEvent) => {
@@ -79,7 +82,7 @@ export default class DragHandler {
       event.preventDefault();
 
       const [pos] = getEventPositions(event);
-      this.startDragging(pos);
+      this.startDragging(event, pos);
     }
   }
 
@@ -96,7 +99,17 @@ export default class DragHandler {
     }
   }
 
-  protected startDragging(pos: IPos) {
+  protected startDragging(event: MouseEvent | TouchEvent, pos: IPos) {
+    let stopped = false;
+    const stop = () => stopped = true;
+    if (this.onStart) {
+      this.onStart({ event, stop });
+    }
+
+    if (stopped) {
+      return;
+    }
+
     this._dragging = true;
     this.startedPos = pos;
   }
