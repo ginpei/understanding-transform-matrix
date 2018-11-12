@@ -86,15 +86,17 @@ export default class SvgDragPoint extends Vue {
 }
 
 .SvgDragPoint-circle {
-  animation: SvgDragPoint-blink 1s alternate infinite ease-out;
+  animation: SvgDragPoint-blink 3s infinite ease-in;
   cursor: move;
-  fill: #0cf9;
+  fill: #09c9;
   stroke-width: 0;
 }
 
 @keyframes SvgDragPoint-blink {
   0% { opacity: 0; transform: scale(1); }
-  60% { opacity: 0; transform: scale(1); }
-  100% { opacity: 1; transform: scale(2); }
+  50% { opacity: 0; transform: scale(1); }
+  53% { opacity: 1; transform: scale(2); }
+  80% { opacity: 0; transform: scale(1.5); }
+  100% { opacity: 0; transform: scale(1); }
 }
 </style>
