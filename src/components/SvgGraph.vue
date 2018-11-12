@@ -37,27 +37,30 @@
         <SvgDragPoint
           :title="`i (${ix}, ${iy})`"
           :color="colors.i"
+          :calm="!dragging"
           :x="ix * aspectRatio"
           :y="iy * aspectRatio"
           :onMove="i_onMove"
-          :onEnd="i_onEnd"
+          :onEnd="onDragEnd"
         />
         <SvgDragPoint
           :title="`j (${jx}, ${jy})`"
           :color="colors.j"
+          :calm="!dragging"
           :x="jx * aspectRatio"
           :y="jy * aspectRatio"
           :onMove="j_onMove"
-          :onEnd="j_onEnd"
+          :onEnd="onDragEnd"
         />
       </g>
       <SvgDragPoint
         :title="`translate (${tx}, ${ty})`"
         :color="colors.translation"
+        :calm="!dragging"
         :x="tx"
         :y="ty"
         :onMove="t_onMove"
-        :onEnd="t_onEnd"
+        :onEnd="onDragEnd"
       />
     </g>
   </svg>
@@ -94,6 +97,7 @@ export default class SvgGraph extends Vue {
   @Prop() protected onOriginMove!: (diff: IPos) => void;
   @Prop() protected onOriginMoveEnd!: () => void;
 
+  protected dragging = false;
   protected dragHandler = new DragHandler();
 
   // offset
@@ -129,6 +133,8 @@ export default class SvgGraph extends Vue {
     if (data.event.target !== this.$el) {
       data.stop();
     }
+
+    this.dragging = true;
   }
 
   public t_onMove(diff: IPos) {
@@ -138,19 +144,11 @@ export default class SvgGraph extends Vue {
     });
   }
 
-  public t_onEnd(diff: IPos) {
-    this.onEnd();
-  }
-
   public i_onMove(diff: IPos) {
     this.onMove({
       ix: diff.x / this.aspectRatio,
       iy: diff.y / this.aspectRatio,
     });
-  }
-
-  public i_onEnd(diff: IPos) {
-    this.onEnd();
   }
 
   public j_onMove(diff: IPos) {
@@ -160,8 +158,9 @@ export default class SvgGraph extends Vue {
     });
   }
 
-  public j_onEnd(diff: IPos) {
+  public onDragEnd(diff: IPos) {
     this.onEnd();
+    this.dragging = false;
   }
 }
 </script>

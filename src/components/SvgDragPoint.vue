@@ -6,7 +6,9 @@
       :fill="color"
     >{{ title }}</text>
     <circle class="SvgDragPoint-touchArea" r="30" />
-    <circle class="SvgDragPoint-circle" r="10" />
+    <circle class="SvgDragPoint-circle" r="10"
+      v-show="calm"
+    />
   </g>
 </template>
 
@@ -19,6 +21,7 @@ import { IPos, zeroPos, noop, fixMatrixNumber } from '@/misc';
 export default class SvgDragPoint extends Vue {
   @Prop() protected title!: string;
   @Prop() protected color!: string;
+  @Prop() protected calm!: boolean;
   @Prop(Number) protected x!: number;
   @Prop(Number) protected y!: number;
   @Prop({ default: noop }) protected onMove!: (diff: IPos) => void;
@@ -90,8 +93,8 @@ export default class SvgDragPoint extends Vue {
 }
 
 @keyframes SvgDragPoint-blink {
-  0% { opacity: 1; transform: scale(2); }
-  40% { opacity: 0; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1); }
+  0% { opacity: 0; transform: scale(1); }
+  60% { opacity: 0; transform: scale(1); }
+  100% { opacity: 1; transform: scale(2); }
 }
 </style>
