@@ -55,4 +55,10 @@ export default class SvgGraph extends Vue {
 .MatrixCode-value {
   font-weight: bold;
 }
+
+@media screen and (max-width: 400px) {
+  .MatrixCode {
+    font-size: 3.5vw;
+  }
+}
 </style>
