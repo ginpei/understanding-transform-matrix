@@ -6,7 +6,8 @@
     "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "release": "npm run lint -s && npm run build -s && push-dir --dir dist --branch gh-pages"
   },
   "dependencies": {
     "vue": "^2.5.17",
@@ -17,6 +18,7 @@
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-typescript": "^3.1.1",
     "@vue/cli-service": "^3.1.1",
+    "push-dir": "^0.4.1",
     "typescript": "^3.0.0",
     "vue-template-compiler": "^2.5.17"
   }
