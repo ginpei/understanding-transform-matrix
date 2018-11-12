@@ -23,6 +23,7 @@
       :onOriginMove="graph_onOriginMove"
       :onOriginMoveEnd="graph_onOriginMoveEnd"
       :posOrigin="mergedOrigin"
+      :pointIndicatorVisible="pointIndicatorVisible"
     />
     <div class="HomePage-controlPanel">
       <HomeFloatingPanel
@@ -52,6 +53,7 @@ export default class App extends Vue {
     header: Vue;
   };
 
+  protected pointIndicatorVisible = true;
   protected graphWidth = 0;
   protected graphHeight = 0;
   protected graphTop = 0;
@@ -113,6 +115,7 @@ export default class App extends Vue {
   }
 
   public graph_onMove(diff: IMatrix) {
+    this.pointIndicatorVisible = false;
     Object.assign(this.draggingMatrix, diff);
   }
 

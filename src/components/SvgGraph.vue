@@ -63,6 +63,14 @@
         :onEnd="onDragEnd"
       />
     </g>
+    <g
+      v-show="pointIndicatorVisible"
+      :transform="`translate(${posOrigin.x + (matrix.ix * 100) - (30 / 2)} ${posOrigin.y})`"
+    >
+      <image class="SvgGraph-pointIndicator"
+        href="/hand-point-up-regular.svg" width="30" height="30"
+      />
+    </g>
   </svg>
 </template>
 
@@ -96,6 +104,7 @@ export default class SvgGraph extends Vue {
   @Prop() protected onEnd!: () => void;
   @Prop() protected onOriginMove!: (diff: IPos) => void;
   @Prop() protected onOriginMoveEnd!: () => void;
+  @Prop() protected pointIndicatorVisible!: boolean;
 
   protected dragging = false;
   protected dragHandler = new DragHandler();
@@ -169,5 +178,16 @@ export default class SvgGraph extends Vue {
 .SvgGraph {
   left: 0;
   position: absolute;
+}
+.SvgGraph-pointIndicator {
+  animation: SvgGraph-pointIndicator 3s 2s infinite backwards;
+}
+
+@keyframes SvgGraph-pointIndicator {
+  0% { transform: translate(0, -10px); opacity: 0; }
+  5% { transform: translate(0, -10px); opacity: 1; }
+  20% { transform: translate(0, 0) }
+  50% { transform: translate(50px, 20px); opacity: 1; }
+  100% { transform: translate(50px, 20px); opacity: 0; }
 }
 </style>
