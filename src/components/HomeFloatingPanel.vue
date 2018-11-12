@@ -148,7 +148,7 @@ export default class HomeFloatingPanel extends Vue {
 .HomeFloatingPanel[data-page="references"]
   .HomeFloatingPanel-tabButton[data-name="references"] {
   background-image: radial-gradient(ellipse at center 80%,
-  #6cf 0%, #6cf 5%, transparent 20%);
+  var(--color-xxx-1) 0%, var(--color-xxx-1) 5%, transparent 20%);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 120px 30px;

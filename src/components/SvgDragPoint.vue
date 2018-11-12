@@ -88,7 +88,7 @@ export default class SvgDragPoint extends Vue {
 .SvgDragPoint-circle {
   animation: SvgDragPoint-blink 3s infinite ease-in;
   cursor: move;
-  fill: #09c9;
+  fill: var(--color-xxx-1);
   stroke-width: 0;
 }
 

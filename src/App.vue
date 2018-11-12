@@ -23,6 +23,7 @@ export default class App extends Vue {
   --GHeader-color-bg: #036;
   --GHeader-color-fg: snow;
   --GHeader-color-border: silver;
+  --color-xxx-1: #09c9;
 }
 
 body {
