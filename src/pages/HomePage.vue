@@ -25,19 +25,15 @@
       :posOrigin="mergedOrigin"
     />
     <div class="HomePage-controlPanel">
-      <div class="HomePage-graphBlock">
-      </div>
-      <div class="HomePage-dataBlock">
-        <p>
-          Presets:
-          <button @click="initial_onClick">Initial</button>
-          <button @click="rotate_onClick">Rotate 30°</button>
-          <button @click="flip_onClick">Flip horizontally</button>
-        </p>
-        <MatrixCode
-          :matrix="mergedMatrix"
-        />
-      </div>
+      <p>
+        Presets:
+        <button @click="initial_onClick">Initial</button>
+        <button @click="rotate_onClick">Rotate 30°</button>
+        <button @click="flip_onClick">Flip horizontally</button>
+      </p>
+      <MatrixCode
+        :matrix="mergedMatrix"
+      />
       <p class="HomePage-links">
         Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&amp;Action_id=121&amp;Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
         (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
