@@ -1,5 +1,5 @@
 <template>
-  <div class="HomePage container">
+  <div class="HomePage">
     <GHeader ref="header" title="Understanding transform:matrix()"
       :headerLinks="[
         {
