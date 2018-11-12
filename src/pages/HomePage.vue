@@ -25,22 +25,10 @@
       :posOrigin="mergedOrigin"
     />
     <div class="HomePage-controlPanel">
-      <p>
-        Presets:
-        <button @click="initial_onClick">Initial</button>
-        <button @click="rotate_onClick">Rotate 30°</button>
-        <button @click="flip_onClick">Flip horizontally</button>
-      </p>
-      <MatrixCode
+      <HomeFloatingPanel
         :matrix="mergedMatrix"
+        :onPreset="floatingPanel_onPreset"
       />
-      <p class="HomePage-links">
-        Image from <a href="https://www.e-hon.ne.jp/bec/SA/Detail?refShinCode=0100000000000007245581&amp;Action_id=121&amp;Sza_id=C0">賢い犬リリエンタール 4（葦原大介）</a>
-        (<a href="https://www.amazon.co.jp/dp/B00B45DJUI/">Kindle</a>)
-        <br/>
-        Recommend to read:
-        <a href="http://www.ajimatics.com/entry/2018/10/31/060000">線形代数の知識ゼロから始めて行列式「だけ」理解する - アジマティクス</a>
-      </p>
     </div>
   </div>
 </template>
@@ -49,14 +37,14 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { IPos, IMatrix, getMatrixStr, mergeMatrix, roundMatrix } from '@/misc';
 import SvgGraph from '@/components/SvgGraph.vue';
-import MatrixCode from '@/components/MatrixCode.vue';
 import GHeader from '@/components/GHeader.vue';
+import HomeFloatingPanel from '@/components/HomeFloatingPanel.vue';
 
 @Component({
   components: {
     SvgGraph,
-    MatrixCode,
     GHeader,
+    HomeFloatingPanel,
   },
 })
 export default class App extends Vue {
@@ -149,31 +137,30 @@ export default class App extends Vue {
     this.posOriginDiff.y = 0;
   }
 
-  public initial_onClick() {
-    Object.assign(this.posOrigin, this.posInitialOrigin);
-    Object.assign(this.matrix, {
-      ix: 1, iy: 0,
-      jx: 0, jy: 1,
-      tx: 0, ty: 0,
-    });
-  }
-
-  public rotate_onClick() {
-    Object.assign(this.posOrigin, this.posInitialOrigin);
-    Object.assign(this.matrix, {
-      ix: this.cos(30), iy: this.sin(30),
-      jx: this.cos(90 + 30), jy: this.sin(90 + 30),
-      tx: 0, ty: 0,
-    });
-  }
-
-  public flip_onClick() {
-    Object.assign(this.posOrigin, this.posInitialOrigin);
-    Object.assign(this.matrix, {
-      ix: -1, iy: 0,
-      jx: 0, jy: 1,
-      tx: 100, ty: 0,
-    });
+  public floatingPanel_onPreset(data: { type: string }) {
+    const { type } = data;
+    if (type === 'initial') {
+      Object.assign(this.posOrigin, this.posInitialOrigin);
+      Object.assign(this.matrix, {
+        ix: 1, iy: 0,
+        jx: 0, jy: 1,
+        tx: 0, ty: 0,
+      });
+    } else if (type === 'rotate') {
+      Object.assign(this.posOrigin, this.posInitialOrigin);
+      Object.assign(this.matrix, {
+        ix: this.cos(30), iy: this.sin(30),
+        jx: this.cos(90 + 30), jy: this.sin(90 + 30),
+        tx: 0, ty: 0,
+      });
+    } else if (type === 'flip') {
+      Object.assign(this.posOrigin, this.posInitialOrigin);
+      Object.assign(this.matrix, {
+        ix: -1, iy: 0,
+        jx: 0, jy: 1,
+        tx: 100, ty: 0,
+      });
+    }
   }
 
   protected updateSize() {
@@ -205,21 +192,10 @@ body[data-page="HomePage"] {
   margin-top: calc(var(--GHeader-height) + 1rem);
 }
 .HomePage-controlPanel {
-  background: #ccc9;
-  border-top: 1px solid #ccc;
   bottom: 0;
   box-sizing: border-box;
-  box-shadow: 0 -1px 5px #0003;
   left: 0;
-  overflow: auto;
-  padding: 0.4em;
   position: absolute;
   width: 100%;
-}
-.HomePage-position {
-  font-weight: bold;
-}
-.HomePage-links {
-  font-size: 10px;
 }
 </style>
