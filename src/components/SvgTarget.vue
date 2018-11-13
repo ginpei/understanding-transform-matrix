@@ -2,7 +2,7 @@
   <g class="SvgTarget"
     :style="{ transform: sMatrix }"
   >
-    <image class="SvgTarget-image" href="/image.png"
+    <image class="SvgTarget-image" xlink:href="/image.png"
       :width="100"
       :height="100"
     />

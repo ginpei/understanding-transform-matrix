@@ -70,7 +70,7 @@
         ${posOrigin.y + matrix.ty + (matrix.iy * aspectRatio)})`"
     >
       <image class="SvgGraph-pointIndicator"
-        href="/hand-point-up-regular.svg" width="30" height="30"
+        xlink:href="/hand-point-up-regular.svg" width="30" height="30"
       />
     </g>
   </svg>
