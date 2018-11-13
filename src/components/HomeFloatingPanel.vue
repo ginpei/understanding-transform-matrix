@@ -11,6 +11,14 @@
           :matrix="matrix"
         />
       </article>
+      <article class="HomeFloatingPanel-tabPage" data-name="table">
+        <h1 class="HomeFloatingPanel-tabPageHeading">Matrix</h1>
+        <div class="HomeFloatingPanel-matrixTable">
+          <MatrixTable
+            :matrix="matrix"
+          />
+        </div>
+      </article>
       <article class="HomeFloatingPanel-tabPage" data-name="presets">
         <h1 class="HomeFloatingPanel-tabPageHeading">Presets</h1>
         <button class="HomeFloatingPanel-presetButton" @click="initial_onClick">Initial</button>
@@ -46,6 +54,12 @@
       >
         <img class="HomeFloatingPanel-tabButtonImage" src="/code-solid.svg" width="auto" height="16" alt="Code" />
       </span>
+      <span class="HomeFloatingPanel-tabButton" data-name="table"
+        @click="tabButton_onClick"
+      >
+        <span class="HomeFloatingPanel-tabButtonImageText">()</span>
+        <!-- <img class="HomeFloatingPanel-tabButtonImage" src="/sliders-h-solid.svg" width="auto" height="16" alt="Matrix" /> -->
+      </span>
       <span class="HomeFloatingPanel-tabButton" data-name="presets"
         @click="tabButton_onClick"
       >
@@ -64,10 +78,12 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { IMatrix } from '@/misc';
 import MatrixCode from '@/components/MatrixCode.vue';
+import MatrixTable from '@/components/MatrixTable.vue';
 
 export enum TabName {
   hide = 'hide',
   code = 'code',
+  table = 'table',
   presets = 'presets',
   references = 'references',
 }
@@ -76,6 +92,7 @@ export const defaultTabName = TabName.code;
 @Component({
   components: {
     MatrixCode,
+    MatrixTable,
   },
 })
 export default class HomeFloatingPanel extends Vue {
@@ -160,6 +177,8 @@ export default class HomeFloatingPanel extends Vue {
 }
 .HomeFloatingPanel[data-page="code"]
   .HomeFloatingPanel-tabButton[data-name="code"],
+.HomeFloatingPanel[data-page="table"]
+  .HomeFloatingPanel-tabButton[data-name="table"],
 .HomeFloatingPanel[data-page="presets"]
   .HomeFloatingPanel-tabButton[data-name="presets"],
 .HomeFloatingPanel[data-page="references"]
@@ -181,6 +200,8 @@ export default class HomeFloatingPanel extends Vue {
 }
 .HomeFloatingPanel[data-page="code"]
   .HomeFloatingPanel-tabPage[data-name="code"],
+.HomeFloatingPanel[data-page="table"]
+  .HomeFloatingPanel-tabPage[data-name="table"],
 .HomeFloatingPanel[data-page="presets"]
   .HomeFloatingPanel-tabPage[data-name="presets"],
 .HomeFloatingPanel[data-page="references"]
@@ -193,9 +214,15 @@ export default class HomeFloatingPanel extends Vue {
   margin: 0;
 }
 
+.HomeFloatingPanel-matrixTable {
+  text-align: center;
+}
 .HomeFloatingPanel-presetButton {
   height: 3em;
   margin: 0.1em;
+}
+.HomeFloatingPanel-tabButtonImageText {
+  font-weight: bold;
 }
 .HomeFloatingPanel-referenceList {
   margin: 0;

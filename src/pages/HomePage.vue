@@ -121,7 +121,7 @@ export default class HomePage extends Vue {
     this.pointIndicatorVisible = false;
     Object.assign(this.draggingMatrix, diff);
 
-    if (this.curTab !== TabName.hide) {
+    if (this.curTab !== TabName.hide && this.curTab !== TabName.table) {
       this.curTab = TabName.code;
     }
   }
