@@ -1,6 +1,6 @@
 {
   "name": "transform-matrix",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "npm run serve",
