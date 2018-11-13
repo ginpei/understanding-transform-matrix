@@ -25,6 +25,7 @@
         <button class="HomeFloatingPanel-presetButton" @click="rotate_onClick">Rotate 30°</button>
         <button class="HomeFloatingPanel-presetButton" @click="flip_onClick">Flip horizontally</button>
         <button class="HomeFloatingPanel-presetButton" @click="larger_onClick">Twice larger</button>
+        <button class="HomeFloatingPanel-presetButton" @click="skew_onClick">Skew 30°</button>
       </article>
       <article class="HomeFloatingPanel-tabPage" data-name="references">
         <h1 class="HomeFloatingPanel-tabPageHeading">References</h1>
@@ -144,6 +145,16 @@ export default class HomeFloatingPanel extends Vue {
       matrix: {
         ix: 2, iy: 0,
         jx: 0, jy: 2,
+        tx: 0, ty: 0,
+      },
+    });
+  }
+
+  public skew_onClick() {
+    this.onPreset({
+      matrix: {
+        ix: 1, iy: 0,
+        jx: this.sin(30), jy: 1,
         tx: 0, ty: 0,
       },
     });
