@@ -123,7 +123,7 @@ export default class SvgGraph extends Vue {
   protected get jx() { return this.matrix.jx; }
   protected get jy() { return this.matrix.jy; }
 
-  // transition
+  // translation
   protected get tx() { return this.matrix.tx; }
   protected get ty() { return this.matrix.ty; }
 
