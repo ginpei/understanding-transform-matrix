@@ -174,7 +174,7 @@ export default class HomeFloatingPanel extends Vue {
   cursor: pointer;
   flex: 1;
   text-align: center;
-  line-height: 30px;
+  line-height: 50px;
 }
 .HomeFloatingPanel[data-page="code"]
   .HomeFloatingPanel-tabButton[data-name="code"],
