@@ -111,7 +111,7 @@ export default class SvgGraph extends Vue {
   protected dragging = false;
   protected dragHandler = new DragHandler();
 
-  // offset
+  // origin
   protected get ox() { return this.posOrigin.x; }
   protected get oy() { return this.posOrigin.y; }
 
