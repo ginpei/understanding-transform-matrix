@@ -54,7 +54,7 @@
         />
       </g>
       <SvgDragPoint
-        :title="`translate (${tx}, ${ty})`"
+        :title="`translation (${tx}, ${ty})`"
         :color="colors.translation"
         :calm="!dragging"
         :x="tx"
