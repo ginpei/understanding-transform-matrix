@@ -196,7 +196,7 @@ export default class HomeFloatingPanel extends Vue {
 
 .HomeFloatingPanel-tabPage {
   display: none;
-  min-height: 90px;
+  min-height: 95px;
   padding: 0.4em;
 }
 .HomeFloatingPanel[data-page="code"]
