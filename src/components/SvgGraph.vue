@@ -184,6 +184,7 @@ export default class SvgGraph extends Vue {
 }
 .SvgGraph-pointIndicator {
   animation: SvgGraph-pointIndicator 3s 2s infinite backwards;
+  pointer-events: none;
 }
 
 @keyframes SvgGraph-pointIndicator {
