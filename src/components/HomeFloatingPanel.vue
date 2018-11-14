@@ -18,83 +18,6 @@
             :matrix="matrix"
           />
         </div>
-        <p
-          v-show="determinantVisible"
-        >
-          <span class="color-vector-i">{{ matrix.ix }}</span>
-          *
-          (
-            (
-              <span class="color-vector-j">{{ matrix.jy }}</span>
-              *
-              1
-            )
-            -
-            (
-              0
-              *
-              <span class="color-translation">{{ matrix.ty }}</span>
-            )
-          )
-          +
-          <span class="color-vector-i">{{ matrix.iy }}</span>
-          *
-          (
-            (
-              0
-              *
-              <span class="color-translation">{{ matrix.tx }}</span>
-            )
-            -
-            (
-              <span class="color-vector-j">{{ matrix.jx }}</span>
-              *
-              1
-            )
-          )
-          +
-          0
-          *
-          (
-            (
-              <span class="color-vector-j">{{ matrix.jx }}</span>
-              *
-              <span class="color-translation">{{ matrix.ty }}</span>
-            )
-            -
-            (
-              <span class="color-vector-">{{ matrix.jy }}</span>
-              *
-              <span class="color-translation">{{ matrix.tx }}</span>
-            )
-          )
-          <br/>
-          =
-          (
-            <span class="color-vector-i">{{ matrix.ix }}</span>
-            *
-            <span class="color-vector-j">{{ matrix.jy }}</span>
-          )
-          +
-          (
-            <span class="color-vector-i">{{ matrix.iy }}</span>
-            *
-            -
-            (<span class="color-vector-j">{{ matrix.jx }}</span>)
-          )
-          <br/>
-          = {{ fixMatrixNumber(matrix.ix * matrix.jy - matrix.iy * matrix.jx) }}
-        </p>
-        <div style="position: absolute; top: 0.4em; right: 0.4em;">
-          <span class="btn-link"
-            v-show="!determinantVisible"
-            @click="showDeterminant"
-          >Show determinant</span>
-          <span class="btn-link"
-            v-show="determinantVisible"
-            @click="hideDeterminant"
-          >Hide determinant</span>
-        </div>
       </article>
       <article class="HomeFloatingPanel-tabPage" data-name="presets">
         <h1 class="HomeFloatingPanel-tabPageHeading">Presets</h1>
@@ -154,7 +77,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { IMatrix, fixMatrixNumber } from '@/misc';
+import { IMatrix } from '@/misc';
 import MatrixCode from '@/components/MatrixCode.vue';
 import MatrixTable from '@/components/MatrixTable.vue';
 
@@ -179,22 +102,12 @@ export default class HomeFloatingPanel extends Vue {
   @Prop() protected curTab!: TabName;
   @Prop() protected onTabChange!: (data: { name: TabName }) => void;
 
-  protected fixMatrixNumber = fixMatrixNumber;
   protected defaultTabName = defaultTabName;
-  protected determinantVisible = false;
 
   public tabButton_onClick(event: MouseEvent) {
     const el = event.currentTarget as HTMLSpanElement;
     const name = el.getAttribute('data-name') as TabName; // :)
     this.onTabChange({ name });
-  }
-
-  public showDeterminant() {
-    this.determinantVisible = true;
-  }
-
-  public hideDeterminant() {
-    this.determinantVisible = false;
   }
 
   public initial_onClick() {

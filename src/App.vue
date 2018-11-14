@@ -24,29 +24,9 @@ export default class App extends Vue {
   --GHeader-color-fg: snow;
   --GHeader-color-border: silver;
   --color-xxx-1: #09c9;
-  --color-link: #00f;
 }
 
 body {
   font-family: "Helvetica", "Arial", "Yu Gothic", sans-serif;
-}
-:link {
-  color: var(--color-link);
-}
-
-.btn-link {
-  color: var(--color-link);
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.color-vector-i {
-  color: red;
-}
-.color-vector-j {
-  color: blue;
-}
-.color-translation {
-  color: green;
 }
 </style>
