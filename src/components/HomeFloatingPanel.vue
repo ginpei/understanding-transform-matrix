@@ -59,7 +59,6 @@
         @click="tabButton_onClick"
       >
         <span class="HomeFloatingPanel-tabButtonImageText">()</span>
-        <!-- <img class="HomeFloatingPanel-tabButtonImage" src="/sliders-h-solid.svg" width="auto" height="16" alt="Matrix" /> -->
       </span>
       <span class="HomeFloatingPanel-tabButton" data-name="presets"
         @click="tabButton_onClick"
